@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>De Zatte Mol — Gent Editie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#1a0a14; --bg2:#240e1c; --bg3:#2e1226;
+  --pink:#e8517a; --pink2:#f27da0; --pink3:#fbb8cc;
+  --aperol:#f4622a; --aperol2:#f9883f;
+  --gold:#e8c97e; --text:#fde8f0; --muted:#b07090;
+  --border:#3d1830; --border2:#5c2540;
+  --green:#4ade80;
+  --font-display:'Playfair Display',serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-italic:'Cormorant Garamond',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;min-height:100vh;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9998;opacity:.4}
+
+/* BOKEH */
+.bokeh-wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bokeh{position:absolute;border-radius:50%;filter:blur(60px);opacity:.08;animation:float-bokeh 12s ease-in-out infinite}
+.bokeh:nth-child(1){width:300px;height:300px;background:var(--pink);top:-80px;left:-50px;animation-delay:0s}
+.bokeh:nth-child(2){width:200px;height:200px;background:var(--aperol);top:30%;right:-60px;animation-delay:3s}
+.bokeh:nth-child(3){width:250px;height:250px;background:var(--pink2);bottom:20%;left:10%;animation-delay:6s}
+.bokeh:nth-child(4){width:180px;height:180px;background:var(--gold);bottom:10%;right:20%;animation-delay:9s}
+@keyframes float-bokeh{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+
+/* FLOATING PARTICLES */
+.particle{position:fixed;pointer-events:none;z-index:1;font-size:18px;animation:particle-float linear infinite;opacity:0}
+@keyframes particle-float{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.6}90%{opacity:.4}100%{transform:translateY(-100px) rotate(360deg);opacity:0}}
+
+/* NAV */
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(26,10,20,.97);border-top:1px solid var(--border2);display:flex;z-index:100;backdrop-filter:blur(20px)}
+nav button{flex:1;background:none;border:none;color:var(--muted);font-family:var(--font-body);font-size:9px;padding:10px 4px 16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s;letter-spacing:.5px;font-weight:500;position:relative}
+nav button .nav-icon{font-size:19px;transition:transform .2s}
+nav button.active{color:var(--pink2)}
+nav button.active .nav-icon{transform:scale(1.15)}
+nav button:active{opacity:.6}
+nav button .locked-nav{position:absolute;top:6px;right:50%;transform:translateX(10px);font-size:8px;opacity:.6}
+
+/* PAGES */
+.page{display:none;min-height:100vh;padding-bottom:90px;position:relative;z-index:1}
+.page.active{display:block;animation:slideUp .35s cubic-bezier(.22,1,.36,1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* PAGE HEADER */
+.page-header{padding:48px 20px 28px;text-align:center;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(232,81,122,.12) 0%,transparent 80%)}
+.page-header h1{font-family:var(--font-display);font-size:clamp(32px,9vw,56px);font-weight:900;color:var(--text);position:relative;line-height:1;letter-spacing:-.5px}
+.page-header h1 em{font-style:italic;color:var(--pink2)}
+.page-header .subtitle{font-family:var(--font-italic);font-size:14px;font-style:italic;color:var(--muted);margin-top:6px;position:relative;letter-spacing:1px}
+
+/* WINE LOGO */
+.wine-logo{width:64px;height:64px;margin:0 auto 16px;animation:sway 4s ease-in-out infinite;position:relative;filter:drop-shadow(0 4px 20px rgba(232,81,122,.5))}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes flicker{0%,100%{opacity:1}94%{opacity:1}95%{opacity:.4}96%{opacity:1}98%{opacity:.6}99%{opacity:1}}
+
+/* TICKER */
+.ticker-wrap{background:linear-gradient(90deg,var(--bg2),rgba(36,14,28,.8));border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:10px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-block;font-family:var(--font-italic);font-size:13px;font-style:italic;color:var(--pink3);letter-spacing:.5px;animation:ticker 22s linear infinite}
+@keyframes ticker{from{transform:translateX(110vw)}to{transform:translateX(-100%)}}
+
+/* SYNC */
+.sync-status{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);margin:8px 16px;font-weight:500}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite}
+.sync-dot.offline{background:var(--pink);animation:none}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 4px var(--green)}50%{box-shadow:0 0 10px var(--green)}}
+
+/* HOME */
+.weekend-status{margin:16px;background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.weekend-status::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--aperol),var(--gold))}
+.weekend-status h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--pink2);margin-bottom:14px;letter-spacing:1px}
+.phase-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(61,24,48,.5);font-size:12px;color:var(--muted);font-weight:400}
+.phase-item:last-child{border-bottom:none}
+.phase-item.done{color:var(--pink3)}
+.phase-item.active-phase{color:var(--text);font-weight:600}
+.phase-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);flex-shrink:0}
+.phase-item.done .phase-dot{background:var(--pink)}
+.phase-item.active-phase .phase-dot{background:var(--pink);box-shadow:0 0 8px var(--pink);animation:pulse-dot 1.5s infinite}
+
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:4px 16px 16px}
+.home-btn{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:22px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.home-btn::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(232,81,122,.07) 0%,transparent 70%)}
+.home-btn:active{transform:scale(.96);border-color:var(--pink)}
+.home-btn .btn-icon{font-size:32px;transition:transform .3s}
+.home-btn:active .btn-icon{transform:scale(1.2) rotate(5deg)}
+.home-btn .btn-label{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text);text-align:center;letter-spacing:.5px}
+.home-btn .btn-sub{font-family:var(--font-italic);font-size:12px;font-style:italic;color:var(--muted);text-align:center}
+.home-btn.locked{opacity:.5;cursor:default}
+.home-btn.locked::before{content:'🔒';position:absolute;top:8px;right:8px;font-size:12px}
+.home-btn.locked:active{transform:none;border-color:var(--border2)}
+
+/* START WEEKEND BANNER */
+.start-banner{margin:0 16px 16px;background:linear-gradient(135deg,rgba(232,81,122,.15),rgba(244,98,42,.1));border:2px solid var(--pink);border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden;animation:banner-glow 2s ease-in-out infinite}
+@keyframes banner-glow{0%,100%{box-shadow:0 0 15px rgba(232,81,122,.2)}50%{box-shadow:0 0 30px rgba(232,81,122,.4)}}
+.start-banner h3{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--text);margin-bottom:6px}
+.start-banner p{font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.start-weekend-btn{background:linear-gradient(135deg,var(--pink),var(--aperol));border:none;border-radius:30px;padding:14px 32px;font-family:var(--font-display);font-size:18px;font-weight:900;color:white;cursor:pointer;box-shadow:0 4px 20px rgba(232,81,122,.4);transition:all .2s;letter-spacing:.5px}
+.start-weekend-btn:active{transform:scale(.97)}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
+
+/* BUTTONS */
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--pink),var(--aperol));border:none;border-radius:12px;padding:17px;font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:1px;color:white;cursor:pointer;margin-top:8px;transition:all .2s;box-shadow:0 4px 20px rgba(232,81,122,.3)}
+.submit-btn:active{transform:scale(.98)}
+.submit-btn:disabled{background:var(--bg3);color:var(--muted);box-shadow:none}
+.inline-btn{background:none;border:1px solid var(--border2);border-radius:10px;padding:9px 14px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:1px;transition:all .2s;text-transform:uppercase}
+.inline-btn:active{border-color:var(--pink);color:var(--pink2)}
+.save-btn{background:rgba(232,81,122,.15);border:1px solid var(--pink);border-radius:10px;padding:10px 18px;font-size:11px;font-weight:700;color:var(--pink2);letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-top:14px;transition:all .2s}
+.save-btn:active{background:rgba(232,81,122,.25)}
+.saved-msg{font-size:11px;font-weight:600;color:var(--gold);margin-top:6px;opacity:0;transition:opacity .3s}
+.saved-msg.show{opacity:1}
+
+/* INPUTS */
+select,input[type=text],input[type=password],textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:var(--font-body);font-size:16px;padding:11px 14px;border-radius:10px;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .2s}
+select:focus,input:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(232,81,122,.1)}
+
+/* PROFILE PAGE */
+.profile-grid{padding:16px;display:flex;flex-direction:column;gap:14px}
+.profile-card{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .3s;animation:slideUp .4s ease both}
+.profile-card:nth-child(1){animation-delay:.05s}
+.profile-card:nth-child(2){animation-delay:.1s}
+.profile-card:nth-child(3){animation-delay:.15s}
+.profile-card:nth-child(4){animation-delay:.2s}
+.profile-card:nth-child(5){animation-delay:.25s}
+.profile-card-header{display:flex;align-items:center;gap:14px;padding:16px}
+.profile-emoji-big{font-size:44px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:var(--bg3);border-radius:50%;flex-shrink:0;border:2px solid var(--border2);transition:transform .3s}
+.profile-card:hover .profile-emoji-big{transform:scale(1.1) rotate(5deg)}
+.profile-name-big{font-family:var(--font-display);font-size:24px;font-weight:900;color:var(--text);line-height:1}
+.profile-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;margin-top:6px;display:inline-block;text-transform:uppercase}
+.profile-badge.in-spel{background:rgba(232,201,126,.12);color:var(--gold);border:1px solid rgba(232,201,126,.2)}
+.profile-badge.afgevallen{background:rgba(176,112,144,.1);color:var(--muted);border:1px solid var(--border2)}
+.profile-body{padding:0 16px 16px;display:flex;flex-direction:column;gap:8px}
+.profile-bio{font-family:var(--font-italic);font-style:italic;font-size:14px;color:var(--muted);line-height:1.55;padding:10px 14px;background:var(--bg3);border-radius:8px;border-left:3px solid var(--pink)}
+.profile-quote{font-family:var(--font-italic);font-style:italic;font-size:15px;color:var(--gold);line-height:1.55;padding:10px 14px;background:rgba(232,201,126,.06);border-radius:8px;border-left:3px solid var(--gold)}
+.profile-quote::before{content:'"'}
+.profile-quote::after{content:'"'}
+.profile-empty{font-size:12px;color:var(--muted);font-style:italic}
+.profile-edit-btn{background:none;border:1px dashed var(--border2);border-radius:8px;padding:8px;font-size:11px;color:var(--muted);cursor:pointer;text-align:center;transition:all .2s;width:100%}
+.profile-edit-btn:active{border-color:var(--pink);color:var(--pink2)}
+.verdachte-bar{margin-top:4px;display:flex;align-items:center;gap:8px}
+.verdachte-label{font-size:9px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:1px;text-transform:uppercase}
+.verdachte-track{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.verdachte-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--pink2));border-radius:3px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.verdachte-pct{font-size:10px;font-weight:600;color:var(--pink3);min-width:28px;text-align:right}
+
+/* PROFILE PAGE — RICH */
+.profile-grid{padding:16px;display:flex;flex-direction:column;gap:16px}
+.profile-card{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:all .3s;animation:slideUp .4s ease both}
+.profile-card:nth-child(1){animation-delay:.05s}.profile-card:nth-child(2){animation-delay:.1s}
+.profile-card:nth-child(3){animation-delay:.15s}.profile-card:nth-child(4){animation-delay:.2s}
+.profile-card:nth-child(5){animation-delay:.25s}
+.profile-card-top{position:relative;padding:20px 20px 0;display:flex;align-items:flex-start;gap:16px}
+.profile-color-bar{position:absolute;top:0;left:0;right:0;height:4px;border-radius:20px 20px 0 0}
+.profile-avatar{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;transition:transform .3s;margin-top:8px;position:relative;background:var(--bg3)}
+.profile-card:hover .profile-avatar{transform:scale(1.08) rotate(6deg)}
+.profile-header-info{flex:1;padding-top:10px}
+.profile-name-big{font-family:var(--font-display);font-size:26px;font-weight:900;color:var(--text);line-height:1;margin-bottom:4px}
+.profile-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;display:inline-block;text-transform:uppercase}
+.profile-badge.in-spel{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.profile-badge.afgevallen{background:rgba(176,112,144,.1);color:var(--muted);border:1px solid var(--border2)}
+.profile-body{padding:14px 20px 18px;display:flex;flex-direction:column;gap:10px}
+.profile-bio{font-family:var(--font-italic);font-style:italic;font-size:14px;color:var(--text);line-height:1.6;padding:12px 14px;background:rgba(255,255,255,.03);border-radius:10px;border-left:3px solid var(--pink);position:relative}
+.profile-bio-label{font-size:9px;font-weight:700;color:var(--pink);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.profile-quote{font-family:var(--font-italic);font-style:italic;font-size:15px;color:var(--gold);line-height:1.6;padding:12px 14px;background:rgba(232,201,126,.05);border-radius:10px;border-left:3px solid var(--gold)}
+.profile-kroeg{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);padding:8px 14px;background:rgba(244,98,42,.05);border-radius:8px;border:1px solid rgba(244,98,42,.12)}
+.profile-kroeg strong{color:var(--aperol2)}
+.profile-empty{font-size:13px;color:var(--muted);font-style:italic;text-align:center;padding:8px;opacity:.6}
+.profile-edit-btn{background:none;border:1px dashed var(--border2);border-radius:10px;padding:10px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;text-align:center;transition:all .2s;width:100%;letter-spacing:.5px}
+.profile-edit-btn:active{border-color:var(--pink);color:var(--pink2);background:rgba(232,81,122,.05)}
+.verdachte-bar{margin-top:2px;display:flex;align-items:center;gap:8px}
+.verdachte-label{font-size:9px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:1px;text-transform:uppercase}
+.verdachte-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.verdachte-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--pink2));border-radius:3px;transition:width .8s cubic-bezier(.34,1.56,.64,1)}
+.verdachte-pct{font-size:10px;font-weight:700;color:var(--pink3);min-width:28px;text-align:right}
+
+/* PROFILE EDIT MODAL — FULLER */
+.edit-modal{display:none;position:fixed;inset:0;background:rgba(10,4,8,.92);z-index:300;flex-direction:column;overflow-y:auto;padding:20px}
+.edit-modal.show{display:flex}
+.edit-modal-inner{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:22px;width:100%;max-width:480px;margin:auto;animation:slideUp .3s ease}
+.edit-modal-title{font-family:var(--font-display);font-size:24px;font-weight:900;font-style:italic;color:var(--pink2);margin-bottom:18px}
+.edit-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:8px;margin-top:16px}
+.edit-label:first-of-type{margin-top:0}
+.emoji-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.emoji-opt{font-size:26px;width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:var(--bg3);border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all .15s}
+.emoji-opt.selected{border-color:var(--pink);background:rgba(232,81,122,.12);transform:scale(1.15)}
+.emoji-opt:active{transform:scale(.9)}
+.color-picker{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.color-opt{width:32px;height:32px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s}
+.color-opt.selected{border-color:white;transform:scale(1.2)}
+
+/* HOME PRE-WEEKEND HERO */
+.prewknd-hero{margin:0 16px 16px;position:relative;border-radius:20px;overflow:hidden;background:var(--bg2);border:1px solid var(--border2)}
+.prewknd-gradient{position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,81,122,.18) 0%,rgba(244,98,42,.12) 50%,rgba(232,201,126,.08) 100%);pointer-events:none}
+.prewknd-content{position:relative;padding:24px 20px}
+.prewknd-eyebrow{font-size:10px;font-weight:700;letter-spacing:4px;color:var(--pink);text-transform:uppercase;margin-bottom:8px}
+.prewknd-title{font-family:var(--font-display);font-size:26px;font-weight:900;line-height:1.15;color:var(--text);margin-bottom:10px}
+.prewknd-title em{font-style:italic;color:var(--pink2)}
+.prewknd-desc{font-family:var(--font-italic);font-style:italic;font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.prewknd-countdown-row{display:flex;gap:10px;margin-bottom:18px;justify-content:center}
+.prewknd-count-block{text-align:center;background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:10px 12px;min-width:52px}
+.prewknd-count-num{font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--pink2);line-height:1}
+.prewknd-count-label{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.prewknd-checklist{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.prewknd-check{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-weight:500}
+.prewknd-check.done{color:var(--text)}
+.prewknd-check .check-icon{font-size:18px;flex-shrink:0}
+.prewknd-tease{background:rgba(232,81,122,.08);border:1px solid rgba(232,81,122,.2);border-radius:12px;padding:14px;font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--pink3);line-height:1.6;text-align:center;margin-bottom:16px}
+
+/* START WEEKEND BTN */
+.start-banner{margin:0 16px 16px;background:linear-gradient(135deg,rgba(232,81,122,.15),rgba(244,98,42,.1));border:2px solid var(--pink);border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden}
+.start-banner h3{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--text);margin-bottom:6px}
+.start-banner p{font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+@keyframes banner-glow{0%,100%{box-shadow:0 6px 24px rgba(232,81,122,.35)}50%{box-shadow:0 6px 40px rgba(232,81,122,.65)}}
+.start-weekend-btn{background:linear-gradient(135deg,var(--pink),var(--aperol));border:none;border-radius:14px;padding:16px 32px;font-family:var(--font-display);font-size:19px;font-weight:900;color:white;cursor:pointer;box-shadow:0 6px 24px rgba(232,81,122,.4);transition:all .2s;letter-spacing:.5px;animation:banner-glow 2s ease-in-out infinite;width:100%}
+.start-weekend-btn:active{transform:scale(.97)}
+
+/* PREGAME */
+.pregame-container{padding:16px}
+.pregame-intro{background:linear-gradient(135deg,rgba(244,98,42,.1),rgba(232,81,122,.08));border:1px solid rgba(244,98,42,.25);border-radius:12px;padding:16px;margin-bottom:18px;font-family:var(--font-italic);font-style:italic;color:var(--aperol2);font-size:14px;line-height:1.65;text-align:center}
+.pregame-q{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:10px;transition:border-color .2s}
+.pregame-q:focus-within{border-color:var(--pink)}
+.pregame-q textarea{min-height:72px;resize:none;margin-top:10px;font-size:15px;line-height:1.55}
+.q-number{font-size:10px;font-weight:700;color:var(--pink);letter-spacing:2px;margin-bottom:8px;text-transform:uppercase}
+.q-text{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:4px}
+
+/* TEST */
+.test-container{padding:16px}
+.test-player-select{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:16px}
+.test-player-select label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:2px;display:block;margin-bottom:10px;text-transform:uppercase}
+.question-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px;margin-bottom:12px;position:relative;overflow:hidden;transition:border-color .2s}
+.question-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),transparent)}
+.options-list{display:flex;flex-direction:column;gap:8px}
+.option-btn{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:13px 14px;color:var(--text);font-family:var(--font-body);font-size:15px;text-align:left;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px}
+.option-btn .opt-letter{font-size:11px;font-weight:700;color:var(--pink);width:18px;flex-shrink:0;text-transform:uppercase}
+.option-btn.selected{background:rgba(232,81,122,.12);border-color:var(--pink)}
+.option-btn:active{opacity:.75}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:16px}
+.tab-btn{flex:1;background:none;border:none;border-bottom:2px solid transparent;padding:13px 8px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+.tab-btn.active{color:var(--pink2);border-bottom-color:var(--pink2)}
+
+/* RESULTATEN */
+.resultaten-container{padding:16px}
+.score-board{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.score-row{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:all .3s}
+.score-row.rank-1{border-color:rgba(232,201,126,.4)}
+.score-row.rank-1::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(232,201,126,.06),transparent)}
+.score-rank{font-family:var(--font-display);font-size:26px;font-weight:900;color:var(--muted);width:30px;flex-shrink:0}
+.score-rank.first{color:var(--gold)}
+.score-rank.last{color:var(--pink)}
+.score-name{flex:1;font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:.5px}
+.score-pts{font-size:13px;font-weight:600;color:var(--pink3)}
+.score-bar-wrap{margin-top:5px;width:100%}
+.score-bar-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.score-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--aperol2));border-radius:2px;transition:width .8s cubic-bezier(.34,1.56,.64,1)}
+.elimination-section{background:linear-gradient(135deg,rgba(232,81,122,.08),rgba(26,10,20,.8));border:1px solid var(--border2);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px}
+.trigger-elim-btn{width:100%;background:rgba(232,81,122,.1);border:1px solid var(--pink);border-radius:12px;padding:14px;font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--pink2);cursor:pointer;margin-bottom:10px;transition:all .2s;letter-spacing:.5px}
+.trigger-elim-btn:active{background:rgba(232,81,122,.2)}
+
+/* OPDRACHTEN */
+.opdracht-card{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:18px;margin:0 16px 12px;position:relative;overflow:hidden;transition:transform .2s}
+.opdracht-card:active{transform:scale(.98)}
+.opdracht-card::before{content:'';position:absolute;bottom:0;right:0;width:80px;height:80px;background:radial-gradient(ellipse,rgba(244,98,42,.07) 0%,transparent 70%);border-radius:50%}
+.opdracht-number{font-size:10px;font-weight:700;color:var(--aperol2);letter-spacing:2px;margin-bottom:8px;text-transform:uppercase}
+.opdracht-title{font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--text);margin-bottom:8px;line-height:1.1}
+.opdracht-desc{font-family:var(--font-italic);font-size:14px;font-style:italic;color:var(--muted);line-height:1.65}
+.opdracht-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.tag{font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase}
+.tag-chaos{background:rgba(232,81,122,.15);color:var(--pink3);border:1px solid rgba(232,81,122,.2)}
+.tag-slim{background:rgba(232,201,126,.12);color:var(--gold);border:1px solid rgba(232,201,126,.2)}
+.tag-fun{background:rgba(244,98,42,.12);color:var(--aperol2);border:1px solid rgba(244,98,42,.2)}
+.tag-gent{background:rgba(251,184,204,.12);color:var(--pink2);border:1px solid rgba(251,184,204,.2)}
+
+/* DRINKSPEL */
+.drink-wrap{padding:16px}
+.drink-intro{background:linear-gradient(135deg,rgba(244,98,42,.1),rgba(232,81,122,.07));border:1px solid rgba(244,98,42,.25);border-radius:12px;padding:16px;margin-bottom:18px;font-family:var(--font-italic);font-style:italic;color:var(--aperol2);font-size:14px;line-height:1.65;text-align:center}
+.drink-category-title{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--pink2);letter-spacing:1px;margin:20px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:8px}
+.drink-rule{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
+.drink-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.drink-text{font-size:14px;color:var(--text);line-height:1.5}
+.drink-text strong{color:var(--pink2);font-weight:600}
+.drink-wheel-btn{width:100%;background:linear-gradient(135deg,var(--aperol),var(--pink));border:none;border-radius:14px;padding:18px;font-family:var(--font-display);font-size:18px;font-weight:900;color:white;cursor:pointer;margin-top:16px;transition:all .2s;box-shadow:0 4px 20px rgba(244,98,42,.35);letter-spacing:.5px}
+.drink-wheel-btn:active{transform:scale(.97)}
+.drink-result-card{background:linear-gradient(135deg,rgba(244,98,42,.15),rgba(232,81,122,.1));border:1px solid rgba(244,98,42,.3);border-radius:14px;padding:20px;margin-top:14px;text-align:center;display:none;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.drink-result-card.show{display:block}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.drink-result-icon{font-size:52px;display:block;margin-bottom:10px}
+.drink-result-text{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:6px}
+.drink-result-sub{font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--muted)}
+
+/* MOL TAAK */
+.moltaak-wrap{padding:16px}
+.moltaak-lock-notice{background:linear-gradient(135deg,rgba(232,81,122,.1),rgba(244,98,42,.08));border:1px solid rgba(232,81,122,.3);border-radius:14px;padding:20px;text-align:center;margin-bottom:20px}
+.moltaak-lock-notice p{font-family:var(--font-italic);font-style:italic;color:var(--muted);font-size:14px;line-height:1.6}
+.generator-btn{width:100%;background:linear-gradient(135deg,#2a0a20,#1a0a14);border:2px solid var(--pink);border-radius:16px;padding:28px 20px;cursor:pointer;text-align:center;transition:all .2s;position:relative;overflow:hidden;margin-bottom:20px}
+.generator-btn:active{transform:scale(.98);background:rgba(232,81,122,.1)}
+.gen-icon{font-size:48px;display:block;margin-bottom:10px;animation:sway 3s ease-in-out infinite}
+.gen-label{font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--pink2);letter-spacing:1px;display:block;margin-bottom:4px}
+.gen-sub{font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--muted)}
+.taak-result{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:22px;margin-bottom:14px;display:none;position:relative;overflow:hidden;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.taak-result.show{display:block}
+.taak-result::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--aperol),var(--gold))}
+.taak-category{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--aperol2);margin-bottom:8px}
+.taak-text{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:10px}
+.taak-detail{font-family:var(--font-italic);font-style:italic;font-size:14px;color:var(--muted);line-height:1.65}
+.taak-moeilijk{display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pink3)}
+
+/* FOTOMOMENTEN */
+.foto-wrap{padding:16px}
+.foto-intro{background:linear-gradient(135deg,rgba(232,201,126,.1),rgba(232,81,122,.07));border:1px solid rgba(232,201,126,.25);border-radius:12px;padding:16px;margin-bottom:18px;font-family:var(--font-italic);font-style:italic;color:var(--gold);font-size:14px;line-height:1.65;text-align:center}
+.foto-card{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:12px;position:relative}
+.foto-header{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.foto-moment-num{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.foto-unlock-badge{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(232,201,126,.12);color:var(--gold);border:1px solid rgba(232,201,126,.25);text-transform:uppercase}
+.foto-unlock-badge.unlocked{background:rgba(232,81,122,.12);color:var(--pink2);border-color:rgba(232,81,122,.25)}
+.foto-body{padding:16px}
+.foto-title{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--text);margin-bottom:6px}
+.foto-desc{font-family:var(--font-italic);font-style:italic;font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.foto-lock-overlay{position:absolute;inset:0;background:rgba(26,10,20,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:14px}
+.foto-lock-overlay.hidden{display:none}
+.foto-lock-icon{font-size:36px}
+.foto-lock-text{font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--muted);text-align:center;padding:0 20px}
+
+/* LIEGEN */
+.liegen-wrap{padding:16px}
+.liegen-intro{background:linear-gradient(135deg,rgba(232,81,122,.12),rgba(244,98,42,.08));border:1px solid rgba(232,81,122,.3);border-radius:14px;padding:18px;margin-bottom:18px;text-align:center}
+.liegen-intro h3{font-family:var(--font-display);font-size:20px;font-weight:900;color:var(--pink2);margin-bottom:8px}
+.liegen-intro p{font-family:var(--font-italic);font-style:italic;font-size:13px;color:var(--muted);line-height:1.6}
+.liegen-score-board{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.liegen-player-row{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.liegen-player-name{font-family:var(--font-display);font-size:17px;font-weight:700;flex:1}
+.liegen-crown{font-size:16px}
+.liegen-score-btns{display:flex;gap:6px;align-items:center}
+.liegen-score-val{font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--pink2);min-width:32px;text-align:center}
+.liegen-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);background:var(--bg3);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.liegen-btn:active{transform:scale(.9);background:rgba(232,81,122,.15);border-color:var(--pink)}
+.liegen-rules{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:12px}
+.liegen-rules h4{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--gold);margin-bottom:10px}
+.liegen-rule-item{font-size:13px;color:var(--muted);line-height:1.6;padding:6px 0;border-bottom:1px solid rgba(61,24,48,.4);display:flex;gap:8px}
+.liegen-rule-item:last-child{border-bottom:none}
+.liegen-rule-item em{color:var(--pink2);font-style:normal;font-weight:600}
+.new-round-btn{width:100%;background:linear-gradient(135deg,var(--pink),var(--aperol));border:none;border-radius:12px;padding:15px;font-family:var(--font-display);font-size:17px;font-weight:900;color:white;cursor:pointer;margin-top:8px;transition:all .2s;box-shadow:0 4px 16px rgba(232,81,122,.3)}
+.new-round-btn:active{transform:scale(.97)}
+
+/* ADMIN */
+.admin-container{padding:16px}
+.admin-lock{text-align:center;padding:48px 20px}
+.admin-lock .lock-icon{font-size:56px;margin-bottom:18px;display:block}
+.admin-lock h2{font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--pink2);margin-bottom:24px}
+.admin-form{display:flex;flex-direction:column;gap:12px;max-width:300px;margin:0 auto}
+.admin-section{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px;margin-bottom:12px}
+.admin-section h3{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--pink2);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.admin-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.5px;display:block;margin-bottom:6px;margin-top:14px;text-transform:uppercase}
+.admin-label:first-child{margin-top:0}
+
+/* ELIMINATIE OVERLAY */
+.elim-overlay{display:none;position:fixed;inset:0;z-index:500;background:#0a0006;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.elim-overlay.show{display:flex}
+.elim-fase{width:100%;padding:30px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.elim-flashes{position:fixed;inset:0;pointer-events:none;z-index:501}
+@keyframes red-flash{0%{background:rgba(220,20,60,0)}15%{background:rgba(220,20,60,.55)}30%{background:rgba(220,20,60,0)}50%{background:rgba(220,20,60,.4)}65%{background:rgba(220,20,60,0)}80%{background:rgba(220,20,60,.65)}100%{background:rgba(220,20,60,0)}}
+.elim-flashes.flashing{animation:red-flash .8s ease-in-out}
+.elim-countdown-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.elim-label-top{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:6px;color:var(--pink);text-transform:uppercase;opacity:.8}
+.elim-label-sub{font-family:var(--font-italic);font-style:italic;font-size:18px;color:var(--muted);margin-bottom:20px}
+.elim-countdown{font-family:var(--font-display);font-size:clamp(120px,35vw,200px);font-weight:900;line-height:1;color:var(--pink);text-shadow:0 0 40px rgba(232,81,122,.8),0 0 80px rgba(232,81,122,.4);animation:count-pulse 1s ease-in-out}
+@keyframes count-pulse{0%{transform:scale(1.4);opacity:0}40%{transform:scale(1);opacity:1}85%{transform:scale(1);opacity:1}100%{transform:scale(.85);opacity:.3}}
+.elim-reveal-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;animation:slideUp .6s cubic-bezier(.22,1,.36,1)}
+.elim-reveal-label{font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.elim-reveal-name{font-family:var(--font-display);font-size:clamp(44px,13vw,80px);font-weight:900;font-style:italic;color:var(--text);line-height:1;text-shadow:0 0 30px rgba(232,81,122,.5);animation:flicker 3s infinite}
+.elim-reveal-score{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--pink2);margin-top:4px}
+.elim-reveal-sub{font-family:var(--font-italic);font-style:italic;font-size:15px;color:var(--muted);margin-bottom:10px}
+.elim-wine-row{font-size:32px;letter-spacing:8px;margin:10px 0 24px;animation:sway 2s ease-in-out infinite}
+.elim-close-btn{background:linear-gradient(135deg,var(--pink),var(--aperol));border:none;border-radius:30px;padding:14px 40px;font-family:var(--font-body);font-size:15px;font-weight:700;color:white;cursor:pointer;box-shadow:0 4px 20px rgba(232,81,122,.5);letter-spacing:.5px}
+.elim-close-btn:active{transform:scale(.97)}
+@keyframes border-pulse{0%,100%{box-shadow:inset 0 0 0 0px rgba(220,20,60,0)}50%{box-shadow:inset 0 0 0 6px rgba(220,20,60,.6)}}
+.elim-overlay.counting{animation:border-pulse 1s infinite}
+
+/* TOAST */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:linear-gradient(135deg,var(--pink),var(--aperol));color:white;font-size:13px;font-weight:600;letter-spacing:.5px;padding:12px 22px;border-radius:30px;z-index:400;transition:transform .35s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 6px 24px rgba(232,81,122,.4)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* LOCKED PAGE */
+.locked-page{text-align:center;padding:60px 24px}
+.locked-page .lock-big{font-size:64px;margin-bottom:16px;display:block;animation:sway 3s ease-in-out infinite}
+.locked-page h2{font-family:var(--font-display);font-size:26px;font-weight:900;color:var(--muted);margin-bottom:10px}
+.locked-page p{font-family:var(--font-italic);font-style:italic;font-size:15px;color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto}
+
+/* MISC */
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted);font-family:var(--font-italic);font-style:italic;font-size:15px}
+.empty-state .es-icon{font-size:44px;margin-bottom:12px;display:block}
+.section-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;padding:0 4px}
+
+@media(min-width:480px){.home-grid{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="bokeh-wrap">
+  <div class="bokeh"></div><div class="bokeh"></div>
+  <div class="bokeh"></div><div class="bokeh"></div>
+</div>
+<div id="particleContainer"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ELIMINATIE OVERLAY -->
+<div class="elim-overlay" id="elimOverlay">
+  <div class="elim-fase" id="elimFase1">
+    <div class="elim-flashes" id="elimFlashes"></div>
+    <div class="elim-countdown-wrap">
+      <div class="elim-label-top">DE ZATTE MOL</div>
+      <div class="elim-label-sub">Elimineert…</div>
+      <div class="elim-countdown" id="elimCountdown">5</div>
+    </div>
+  </div>
+  <div class="elim-fase" id="elimFase2" style="display:none">
+    <div class="elim-reveal-wrap">
+      <div class="elim-reveal-label">Afgevallen</div>
+      <div class="elim-reveal-name" id="elimRevealName">NAAM</div>
+      <div class="elim-reveal-score" id="elimRevealScore"></div>
+      <div class="elim-reveal-sub">had de laagste score op de test</div>
+      <div class="elim-wine-row">🍷🍷🍷</div>
+      <button class="elim-close-btn" onclick="closeElimOverlay()">Sluiten 🍸</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFIEL EDIT MODAL -->
+<div class="edit-modal" id="editModal">
+  <div class="edit-modal-inner">
+    <div class="edit-modal-title">✏️ Jouw profiel</div>
+    <span class="edit-label">Kies je emoji</span>
+    <div class="emoji-picker" id="emojiPicker"></div>
+    <span class="edit-label">Kies je kleur</span>
+    <div class="color-picker" id="colorPicker"></div>
+    <span class="edit-label">Naam</span>
+    <input type="text" id="editName" placeholder="Jouw naam...">
+    <span class="edit-label">🔍 Jouw verdachte eigenschap</span>
+    <textarea id="editBio" placeholder="Wat maakt jou verdacht? Of juist niet? Wees eerlijk over jezelf..." style="min-height:75px;resize:none;margin-top:6px"></textarea>
+    <span class="edit-label">💬 Quote of guilty pleasure</span>
+    <textarea id="editQuote" placeholder="Een quote, je motto, of het meest gênante dat je ooit deed..." style="min-height:60px;resize:none;margin-top:6px"></textarea>
+    <span class="edit-label">🍺 Favoriete kroeg in Gent</span>
+    <input type="text" id="editKroeg" placeholder="Dreupelkot, Waterhuis, De Dulle Griet...">
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="inline-btn" onclick="closeEditModal()" style="flex:1">Annuleren</button>
+      <button class="submit-btn" onclick="saveProfile()" style="flex:2;margin-top:0;font-size:16px">Opslaan 💾</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="page-header">
+    <div class="wine-logo">
+      <svg viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="29" y="56" width="6" height="16" rx="3" fill="#5c2540"/>
+        <ellipse cx="32" cy="74" rx="14" ry="4" fill="#5c2540"/>
+        <path d="M12 8 Q12 52 32 54 Q52 52 52 8 Z" fill="none" stroke="#e8517a" stroke-width="2"/>
+        <clipPath id="bowl-clip"><path d="M12 8 Q12 52 32 54 Q52 52 52 8 Z"/></clipPath>
+        <rect x="12" y="32" width="40" height="24" fill="#e8517a" opacity="0.7" clip-path="url(#bowl-clip)"/>
+        <circle cx="22" cy="38" r="2" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="38" cy="44" r="1.5" fill="rgba(255,255,255,0.25)"/>
+        <circle cx="28" cy="42" r="1" fill="rgba(255,255,255,0.2)"/>
+        <path d="M16 14 Q16 28 20 36" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>De Zatte <em>Mol</em></h1>
+    <div class="subtitle">Gent Editie — Wie is de Zatte Mol?</div>
+  </div>
+
+  <div class="sync-status" id="syncStatus">
+    <div class="sync-dot" id="syncDot" style="background:var(--muted)"></div>
+    <span id="syncText">Verbinden...</span>
+  </div>
+
+  <div class="ticker-wrap">
+    <span class="ticker-inner" id="tickerText">🍷 Laden...</span>
+  </div>
+
+  <div style="height:12px"></div>
+
+  <!-- Pre-weekend hero — shown when weekend not started -->
+  <div id="startBanner" style="display:none">
+    <div class="prewknd-hero">
+      <div class="prewknd-gradient"></div>
+      <div class="prewknd-content">
+        <div class="prewknd-eyebrow">⚠️ Nog niet begonnen</div>
+        <div class="prewknd-title">Iemand in deze groep<br>is <em>De Zatte Mol.</em></div>
+        <div class="prewknd-desc">Ze is al begonnen met plannen.<br>Jij weet het nog niet. Zij wel.</div>
+        <div class="prewknd-countdown-row" id="countdownRow">
+          <div class="prewknd-count-block"><div class="prewknd-count-num" id="cdDagen">—</div><div class="prewknd-count-label">dagen</div></div>
+          <div class="prewknd-count-block"><div class="prewknd-count-num" id="cdUren">—</div><div class="prewknd-count-label">uren</div></div>
+          <div class="prewknd-count-block"><div class="prewknd-count-num" id="cdMin">—</div><div class="prewknd-count-label">min</div></div>
+          <div class="prewknd-count-block"><div class="prewknd-count-num" id="cdSec">—</div><div class="prewknd-count-label">sec</div></div>
+        </div>
+        <div class="prewknd-checklist" id="prewkndChecklist"></div>
+        <div class="prewknd-tease">
+          🔒 Opdrachten, test, scores, drinkspel, mol taak…<br>
+          alles wacht op je. Maar eerst: <em>wie vertrouw jij?</em>
+        </div>
+        <button class="inline-btn" onclick="goTo('kandidaten')" style="width:100%;margin-bottom:10px;font-size:13px">💅 Bekijk de spelers →</button>
+        <button class="inline-btn" onclick="goTo('pregame')" style="width:100%;font-size:13px">🎭 Vul de pre-game in →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin start weekend button — only shown when admin unlocked -->
+  <div id="adminStartBanner" style="display:none;margin:0 16px 16px">
+    <button class="start-weekend-btn" style="width:100%" onclick="confirmStartWeekend()">🎉 Start Het Weekend!</button>
+  </div>
+
+  <div class="weekend-status" id="weekendStatus">
+    <h3>🗓 Weekend Status</h3>
+    <div class="phase-item" id="phase-pre"><div class="phase-dot"></div> <strong>Pre-Weekend</strong>&nbsp;— Profielen & Pre-Game</div>
+    <div class="phase-item" id="phase-vrijdag"><div class="phase-dot"></div> <strong>Vrijdagavond</strong>&nbsp;— Test Ronde 1</div>
+    <div class="phase-item" id="phase-zaterdag"><div class="phase-dot"></div> <strong>Zaterdagavond</strong>&nbsp;— Eliminatie + Test Ronde 2</div>
+    <div class="phase-item" id="phase-finale"><div class="phase-dot"></div> <strong>Finale</strong>&nbsp;— De Mol onthuld 🍾</div>
+  </div>
+
+  <div class="home-grid" id="homeGrid"></div>
+</div>
+
+<!-- PROFIELEN -->
+<div class="page" id="kandidaten">
+  <div class="page-header">
+    <h1><em>Profielen</em></h1>
+    <div class="subtitle">5 spelers — 1 is De Zatte Mol</div>
+  </div>
+  <div class="profile-grid" id="kandidaatGrid"></div>
+</div>
+
+<!-- PRE-GAME -->
+<div class="page" id="pregame">
+  <div class="page-header">
+    <h1>Pre-<em>Game</em></h1>
+    <div class="subtitle">Gênante bekentenissen</div>
+  </div>
+  <div class="pregame-container">
+    <div class="pregame-intro">🍷 Alle antwoorden worden bewaard en <em>kunnen</em> worden gebruikt tijdens het weekend.<br>Je bent gewaarschuwd. De Mol leest mee.</div>
+    <div class="test-player-select">
+      <label>Wie ben jij?</label>
+      <select id="pregamePlayerSelect"><option value="">— Selecteer jezelf —</option></select>
+    </div>
+    <div id="pregameForm"></div>
+    <button class="submit-btn" id="submitPregameBtn" onclick="submitPregame()" disabled>Bekentenissen opslaan 🔏</button>
+    <div style="height:16px"></div>
+    <button class="inline-btn" onclick="toggleAllAnswers()" style="width:100%;text-align:center">Alle antwoorden bekijken 👁</button>
+    <div id="allAnswersView"></div>
+  </div>
+</div>
+
+<!-- OPDRACHTEN -->
+<div class="page" id="opdrachten">
+  <div class="page-header"><h1><em>Opdrachten</em></h1><div class="subtitle">Gent Editie — chaos of samenwerking?</div></div>
+  <div style="height:8px"></div>
+  <div id="opdrachtenList"></div>
+</div>
+
+<!-- TEST -->
+<div class="page" id="test">
+  <div class="page-header"><h1>De <em>Test</em></h1><div class="subtitle">Wie is de Mol?</div></div>
+  <div class="test-container">
+    <div class="test-player-select">
+      <label>Wie ben jij?</label>
+      <select id="testPlayerSelect"><option value="">— Selecteer jezelf —</option></select>
+    </div>
+    <div id="testForm"></div>
+    <button class="submit-btn" id="submitTestBtn" onclick="submitTest()" disabled>Inzenden 💌</button>
+  </div>
+</div>
+
+<!-- RESULTATEN -->
+<div class="page" id="resultaten">
+  <div class="page-header"><h1><em>Resultaten</em></h1><div class="subtitle">De waarheid ontvouwt zich</div></div>
+  <div class="resultaten-container"><div id="resultatenContent"></div></div>
+</div>
+
+<!-- DRINKSPEL -->
+<div class="page" id="drinkspel">
+  <div class="page-header"><h1><em>Drinkspel</em></h1><div class="subtitle">Regels & drinkwiel</div></div>
+  <div class="drink-wrap">
+    <div class="drink-intro">🍷 Hier zijn alle drinkregels voor het weekend.<br>Gebruik het <em>Drinkwiel</em> voor een willekeurige straf.</div>
+    <div class="drink-category-title">🎭 Test-regels</div>
+    <div class="drink-rule"><div class="drink-icon">📝</div><div class="drink-text">Je stuurde de test als <strong>laatste</strong> in? Drink één slok voor elke minuut te laat.</div></div>
+    <div class="drink-rule"><div class="drink-icon">❌</div><div class="drink-text">Je hebt <strong>0 punten</strong> op de test? Drink twee slokken. De Mol lacht.</div></div>
+    <div class="drink-rule"><div class="drink-icon">🎯</div><div class="drink-text">Je had de <strong>Mol goed geraden</strong>? Jij laat iemand anders drinken!</div></div>
+    <div class="drink-rule"><div class="drink-icon">🔄</div><div class="drink-text">Dezelfde score als iemand? <strong>Rock-paper-scissors.</strong> Verliezer drinkt.</div></div>
+    <div class="drink-category-title">🎪 Opdracht-regels</div>
+    <div class="drink-rule"><div class="drink-icon">💀</div><div class="drink-text">Sabotage <strong>ontdekt</strong>? Drink drie slokken. Proficiat, slechte Mol.</div></div>
+    <div class="drink-rule"><div class="drink-icon">🤥</div><div class="drink-text">Aantoonbare <strong>leugen</strong> gezegd? Drink twee slokken.</div></div>
+    <div class="drink-rule"><div class="drink-icon">😂</div><div class="drink-text">Luidst gelachen op een ongemakkelijk moment? <strong>Drink en leg uit waarom.</strong></div></div>
+    <div class="drink-category-title">🕵️ Verdacht gedrag</div>
+    <div class="drink-rule"><div class="drink-icon">👀</div><div class="drink-text">Iedereen zegt "dat is verdacht"? <strong>Drink één slok.</strong></div></div>
+    <div class="drink-rule"><div class="drink-icon">📱</div><div class="drink-text">Gsm op tijdens opdracht? <strong>Drink én geef gsm 5 min af.</strong></div></div>
+    <div class="drink-rule"><div class="drink-icon">🍷</div><div class="drink-text">Drank besteld voor opdracht klaar is? <strong>Drink extra — dát is echt verdacht.</strong></div></div>
+    <div class="drink-category-title">🎰 Willekeurige straf</div>
+    <button class="drink-wheel-btn" onclick="spinDrinkwheel()">🎰 Draai het Drinkwiel!</button>
+    <div class="drink-result-card" id="drinkResult">
+      <span class="drink-result-icon" id="drinkResultIcon">🍷</span>
+      <div class="drink-result-text" id="drinkResultText"></div>
+      <div class="drink-result-sub" id="drinkResultSub"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIEGEN -->
+<div class="page" id="liegen">
+  <div class="page-header"><h1><em>Liegen</em></h1><div class="subtitle">Kaarten omgedraaid — wie bluft het beste?</div></div>
+  <div class="liegen-wrap">
+    <div class="liegen-intro">
+      <h3>🃏 Liegen (Presidenten variant)</h3>
+      <p>Kaarten worden <em>omgedraaid</em> gespeeld. Je legt kaarten neer maar niemand ziet wat je écht legt. Bluf, lieg, en win!</p>
+    </div>
+
+    <div class="liegen-rules">
+      <h4>📋 Regels</h4>
+      <div class="liegen-rule-item"><span>🎯</span><span>Doel: zo snel mogelijk al je kaarten kwijt. Eerste zonder kaarten = <em>winnaar</em>.</span></div>
+      <div class="liegen-rule-item"><span>🔄</span><span>Reeks kaarten worden omgedraaid neergelegd. Je <em>zegt</em> wat je legt — maar je kan liegen!</span></div>
+      <div class="liegen-rule-item"><span>👀</span><span>Iemand roept <em>"Liegen!"</em>? Kaarten worden omgedraaid. Was het leugen: legger drinkt + pakt alles op. Was het eerlijk: aanklager drinkt + pakt alles op.</span></div>
+      <div class="liegen-rule-item"><span>📈</span><span>Kaartwaarden mogen alleen <em>stijgen of gelijk</em> blijven per beurt (2, 3, 4... tot Aas).</span></div>
+      <div class="liegen-rule-item"><span>🃏</span><span>Jokers zijn <em>wild</em> — mogen als alles doorgaan.</span></div>
+      <div class="liegen-rule-item"><span>🍷</span><span>Gepakt met liegen? <strong>Drink 2 slokken</strong> + kaarten terug. Verkeerd beschuldigd? <strong>Drink 1 slok.</strong></span></div>
+      <div class="liegen-rule-item"><span>👑</span><span>Winnaar van de ronde mag de volgende <em>drinkregel</em> bepalen.</span></div>
+    </div>
+
+    <div class="section-label">🏆 Rondescore bijhouden</div>
+    <div class="liegen-score-board" id="liegenScoreBoard"></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button class="new-round-btn" onclick="liegenNewRound()" style="flex:1">🔄 Nieuwe ronde</button>
+      <button class="inline-btn" onclick="liegenReset()" style="flex:0 0 auto">Reset</button>
+    </div>
+
+    <div class="section-label" style="margin-top:8px">🎰 Liegen Strafwiel</div>
+    <button class="drink-wheel-btn" onclick="spinLiegenWheel()" style="background:linear-gradient(135deg,#3d1060,var(--pink))">🃏 Draai het Liegenwiel!</button>
+    <div class="drink-result-card" id="liegenResult">
+      <span class="drink-result-icon" id="liegenResultIcon">🃏</span>
+      <div class="drink-result-text" id="liegenResultText"></div>
+      <div class="drink-result-sub" id="liegenResultSub"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MOL TAAK -->
+<div class="page" id="moltaak">
+  <div class="page-header"><h1>Mol <em>Taak</em></h1><div class="subtitle">Alleen voor de Mol — geheime sabotage</div></div>
+  <div class="moltaak-wrap">
+    <div class="moltaak-lock-notice">
+      <p>🔒 Deze pagina is <em>alleen</em> voor de Mol.<br>Open dit stiekem, lees je taak, en sluit snel weer.</p>
+    </div>
+    <div id="moltaakPwSection">
+      <select id="moltaakPlayerSelect" style="margin-bottom:10px"><option value="">— Wie ben jij? —</option></select>
+      <input type="password" id="moltaakPwInput" placeholder="Admin wachtwoord..." style="margin-bottom:10px" onkeydown="if(event.key==='Enter')unlockMoltaak()">
+      <button class="submit-btn" onclick="unlockMoltaak()">Bevestig identiteit 🕵️</button>
+    </div>
+    <div id="moltaakContent" style="display:none">
+      <button class="generator-btn" onclick="generateTaak()">
+        <span class="gen-icon">🎲</span>
+        <span class="gen-label">Genereer Geheime Taak</span>
+        <span class="gen-sub">Druk voor een nieuwe sabotage-opdracht</span>
+      </button>
+      <div class="taak-result" id="taakResult">
+        <div class="taak-category" id="taakCategory"></div>
+        <div class="taak-text" id="taakText"></div>
+        <div class="taak-detail" id="taakDetail"></div>
+        <div class="taak-moeilijk">Moeilijkheid: <span id="taakMoeilijk"></span></div>
+      </div>
+      <div style="text-align:center;margin-top:16px">
+        <button class="inline-btn" onclick="generateTaak()">↻ Andere taak</button>
+        &nbsp;
+        <button class="inline-btn" onclick="goTo('home')">Snel weg 🏃</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOTOMOMENTEN -->
+<div class="page" id="fotomomenten">
+  <div class="page-header"><h1>Foto<em>momenten</em></h1><div class="subtitle">Verborgen opdrachten — ontgrendeld op het juiste moment</div></div>
+  <div class="foto-wrap">
+    <div class="foto-intro">📸 Elke fotomoment wordt pas ontgrendeld door de Admin.<br><em>Niemand weet wat er komt... totdat het te laat is.</em></div>
+    <div id="fotomomentList"></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="admin">
+  <div class="page-header"><h1><em>Admin</em></h1><div class="subtitle">Beperkte toegang</div></div>
+  <div class="admin-container">
+    <div class="admin-lock" id="adminLock">
+      <span class="lock-icon">🔒</span>
+      <h2>Admin Toegang</h2>
+      <div class="admin-form">
+        <input type="password" id="adminPwInput" placeholder="Wachtwoord..." onkeydown="if(event.key==='Enter')checkAdminPw()">
+        <button class="submit-btn" onclick="checkAdminPw()">Inloggen 🔑</button>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--muted)">Standaard: mol2024</div>
+    </div>
+    <div id="adminPanel" style="display:none"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <button class="active" onclick="goTo('home')" data-page="home"><span class="nav-icon">🏠</span>Home</button>
+  <button onclick="goTo('kandidaten')" data-page="kandidaten"><span class="nav-icon">💅</span>Profielen</button>
+  <button onclick="goTo('pregame')" data-page="pregame"><span class="nav-icon">🎭</span>Pre-Game</button>
+  <button onclick="navMore()" id="navMoreBtn"><span class="nav-icon">⋯</span>Meer</button>
+  <button onclick="goTo('admin')" data-page="admin"><span class="nav-icon">🔒</span>Admin</button>
+</nav>
+
+<!-- MORE MENU -->
+<div id="moreMenu" style="display:none;position:fixed;bottom:62px;left:0;right:0;background:rgba(26,10,20,.97);border-top:1px solid var(--border2);z-index:99;backdrop-filter:blur(20px);padding:12px 16px;display:none">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px" id="moreMenuGrid"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// JSONBIN STORAGE
+// ══════════════════════════════════════════
+const JSONBIN_ID  = '69ca7705aaba882197a945c1';
+const JSONBIN_KEY = '$2a$10$65AS/xXbXtnhlPu7lv2S9uQlOGAUFZfbfSqQjBzMVKu4yn36IJDPa';
+const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+const LOCAL_KEY   = 'demol_backup';
+
+async function loadSharedState() {
+  try {
+    const res = await fetch(JSONBIN_URL + '/latest', { headers: { 'X-Master-Key': JSONBIN_KEY, 'X-Bin-Meta': 'false' } });
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    if (data && data.players) return data;
+  } catch(e) {
+    try { const l = localStorage.getItem(LOCAL_KEY); if (l) return JSON.parse(l); } catch(e2) {}
+  }
+  return null;
+}
+
+async function saveSharedState(s) {
+  try { localStorage.setItem(LOCAL_KEY, JSON.stringify(s)); } catch(e) {}
+  try {
+    const res = await fetch(JSONBIN_URL, { method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY}, body:JSON.stringify(s) });
+    return res.ok;
+  } catch(e) { return false; }
+}
+
+// ══════════════════════════════════════════
+// SOUND ENGINE
+// ══════════════════════════════════════════
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let actx = null;
+
+function getActx() {
+  if (!actx) actx = new AudioCtx();
+  return actx;
+}
+
+function playTone(freq, type, duration, vol=0.3, delay=0) {
+  try {
+    const ctx = getActx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = type; osc.frequency.value = freq;
+    const t = ctx.currentTime + delay;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(vol, t + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
+    osc.start(t); osc.stop(t + duration);
+  } catch(e) {}
+}
+
+function soundDing() {
+  playTone(880, 'sine', 0.3, 0.25);
+  playTone(1100, 'sine', 0.2, 0.15, 0.08);
+}
+
+function soundGlass() {
+  // Clink: two quick high tones
+  playTone(1400, 'sine', 0.4, 0.2);
+  playTone(1600, 'sine', 0.35, 0.15, 0.05);
+  playTone(1200, 'sine', 0.6, 0.1, 0.15);
+}
+
+function soundDice() {
+  // Rattle: quick random bursts
+  [0, 0.05, 0.1, 0.15, 0.2].forEach((d, i) => {
+    playTone(200 + Math.random()*400, 'square', 0.06, 0.08, d);
+  });
+  playTone(600, 'sine', 0.2, 0.2, 0.25);
+}
+
+function soundCountdown() {
+  playTone(220, 'sawtooth', 0.3, 0.4);
+  playTone(180, 'sawtooth', 0.15, 0.2, 0.15);
+}
+
+function soundElimReveal() {
+  // Dramatic stab
+  [0, 0.1, 0.2].forEach(d => playTone(110, 'sawtooth', 0.4, 0.5, d));
+  playTone(55, 'sine', 0.8, 0.6, 0.35);
+}
+
+function soundSuccess() {
+  [0, 0.1, 0.2].forEach((d, i) => playTone([523, 659, 784][i], 'sine', 0.3, 0.2, d));
+}
+
+function soundError() {
+  playTone(200, 'sawtooth', 0.2, 0.3);
+  playTone(150, 'sawtooth', 0.2, 0.25, 0.1);
+}
+
+// ══════════════════════════════════════════
+// PARTICLES
+// ══════════════════════════════════════════
+const PARTICLE_EMOJIS = ['🍷','🥂','🍊','✨','🎉','💫','🌸'];
+let particlePool = [];
+
+function spawnParticles(n = 8) {
+  const container = document.getElementById('particleContainer');
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = PARTICLE_EMOJIS[Math.floor(Math.random() * PARTICLE_EMOJIS.length)];
+    el.style.left = (10 + Math.random() * 80) + 'vw';
+    el.style.animationDuration = (4 + Math.random() * 4) + 's';
+    el.style.animationDelay = (Math.random() * 2) + 's';
+    el.style.fontSize = (14 + Math.random() * 14) + 'px';
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 8000);
+  }
+}
+
+// Ambient particles every 15s
+setInterval(() => spawnParticles(2), 15000);
+
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const EMOJIS = ['🍷','🥂','🍊','🌸','💅','🔥','👀','🕵️','🎭','🍸','💫','🌙','🦋','🌺','🎀'];
+
+const DEFAULT_PLAYERS = [
+  { id:'p1', name:'Speler 1', bio:'', quote:'', emoji:'🍷', favorietKroeg:'', molScore:0, suspectLevel:'', kleur:'#e8517a' },
+  { id:'p2', name:'Speler 2', bio:'', quote:'', emoji:'🥂', favorietKroeg:'', molScore:0, suspectLevel:'', kleur:'#f9883f' },
+  { id:'p3', name:'Speler 3', bio:'', quote:'', emoji:'🍊', favorietKroeg:'', molScore:0, suspectLevel:'', kleur:'#e8c97e' },
+  { id:'p4', name:'Speler 4', bio:'', quote:'', emoji:'🌸', favorietKroeg:'', molScore:0, suspectLevel:'', kleur:'#f27da0' },
+  { id:'p5', name:'Speler 5', bio:'', quote:'', emoji:'💅', favorietKroeg:'', molScore:0, suspectLevel:'', kleur:'#c084fc' },
+];
+
+const DEFAULT_TEST_QUESTIONS = [
+  // Ronde 1 & 2 — speler-vragen
+  { id:'q1', text:'Wie is De Zatte Mol?', options:['Speler 1','Speler 2','Speler 3','Speler 4','Speler 5'], correctIndex:null },
+  { id:'q2', text:'Wie saboteerde de groepsopdracht het meest subtiel?', options:['Speler 1','Speler 2','Speler 3','Speler 4','Speler 5'], correctIndex:null },
+  { id:'q3', text:'Wie beschikte over de meeste inside info die ze niet mocht hebben?', options:['Speler 1','Speler 2','Speler 3','Speler 4','Speler 5'], correctIndex:null },
+  { id:'q4', text:'Als de Mol een cocktail was, welke zou ze zijn?', options:['Aperol Spritz — lief maar bedrieglijk','Negroni — bitter van binnen','Rosé — onschuldig lijkend','Gin Tonic — koelbloedig','Mojito — altijd in het middelpunt'], correctIndex:null },
+  { id:'q5', text:'Hoe verplaatste de Mol zich het vaakst tijdens opdrachten?', options:['Altijd voorop lopen','Bewust achterblijven','Naast de leider blijven','Rondjes lopen alsof ze iets vergat','Plotseling verdwijnen en terugkomen'], correctIndex:null },
+  { id:'q6', text:'Wat deed de Mol toen de groep een foute keuze maakte?', options:['Zei niks en lachte stiekem','Gaf achteraf een vals excuus','Suggereerde de verkeerde richting','Keek ostentatief de andere kant op','Stelde té veel afleidende vragen'], correctIndex:null },
+  { id:'q7', text:'Welke uitdrukking gebruikte de Mol het vaakst?', options:['"Ik dacht écht dat…"','"Jullie mogen mij vertrouwen"','"Dat was niet mijn bedoeling"','"Wat raar, bij mij werkte het wel"','"Laat mij even, ik weet een shortcut"'], correctIndex:null },
+  { id:'q8', text:'Hoeveel keer dronk de Mol een extra glas zonder dat iemand het zag?', options:['0 — ze was heel voorzichtig','1 keer','2 keer','3 of meer keer','Ze dronk alleen als iedereen keek — slim'], correctIndex:null },
+  { id:'q9', text:'Welk Gents café bezocht de Mol het liefst als uitvalsbasis?', options:['Dreupelkot — jenever als alibi','Waterhuis aan de Bierkant','De Dulle Griet','Gruut Brewery','Het Spijker — altijd donker genoeg'], correctIndex:null },
+  { id:'q10', text:'Hoe reageerde de Mol toen haar naam viel als verdachte?', options:['Lachte te hard en te lang','Veranderde snel van onderwerp','Beschuldigde meteen iemand anders','Bleef opvallend kalm','Zei "Jullie hebben gelijk" en zweeg daarna'], correctIndex:null },
+];
+
+const PREGAME_QUESTIONS = [
+  'Wat is je meest toxische eigenschap als vriendin? Wees brutaal eerlijk.',
+  'Beschrijf het domste of gênantste dat je ooit deed op een avond uit in Gent. Details tellen.',
+  'Wie van de groep zou je als eerste verraden voor €500? En voor €50?',
+  'Wat is het grootste geheim dat je van iemand anders in deze groep weet? (Je hoeft de naam niet te zeggen — maar hoe erg is het op schaal 1-10?)',
+  'Met wie van de groep zou jij als duo De Zatte Mol overleven, en wie zou je meteen dumpen?',
+  'Wat is je go-to smoes als je iets hebt gedaan dat je niet wil toegeven?',
+  'Wat is het laatste drankje dat je besteld hebt terwijl je al genoeg had?',
+  'Wat is het meest verdachte dat je ooit hebt gedaan dat niemand weet?',
+  'Als je De Zatte Mol was — welke sabotage-tactiek zou jij kiezen en waarom?',
+  'Geef elke andere speler een bijnaam gebaseerd op hun slechtste eigenschap. Eerlijk zijn verplicht.',
+];
+
+const OPDRACHTEN = [
+  { number:'01', title:'DREUPELKOT BLINDPROEVEN', desc:'Proef blind 5 jenever- of likeurshotjes en raad de naam. De Mol mag expres fout raden. Hoogste score = meeste punten. Verliezer trakteert de volgende ronde.', tags:['GENT','FUN','CHAOS'] },
+  { number:'02', title:'GRAVENSTEEN ALIBI', desc:'Iets is gestolen van het Gravensteen. Bedenk een overtuigend alibi. Ondervraag mekaar. De beste leugenaar wint punten — de Mol krijgt 2 levens.', tags:['SLIM','GENT','FUN'] },
+  { number:'03', title:'STADSGEHEIMEN', desc:'Iedereen schrijft één echt geheim op. De Mol mag liegen. Voorlezen en raden wie wat schreef. Fout geraden = shot.', tags:['CHAOS','FUN'] },
+  { number:'04', title:'DE TELEFOONTEST', desc:'Geef je gsm 2 minuten aan de persoon rechts van je. Iedereen deelt één finding. De Mol kiest welke finding gedeeld wordt met de hele groep.', tags:['CHAOS'] },
+  { number:'05', title:'WATERZOOI WAARHEID', desc:'Waarheid of dare, maar elk antwoord moet beginnen met een Gentse referentie. De Mol mag 2 vragen negeren. Elke pass = aperolshotje voor jezelf.', tags:['FUN','CHAOS','GENT'] },
+  { number:'06', title:'GENTSE FEESTENAVOND', desc:'Rangschik de groep van "meest gevaarlijk op een avondje uit" tot "saai en vroeg thuis". De Mol herschikt stiekem haar antwoorden vóór het vergelijkingsmoment.', tags:['SLIM','CHAOS','GENT'] },
+  { number:'07', title:'KORENMARKT CHALLENGE', desc:'Elk duo krijgt een foto van een plek in Gent. Eerste duo ter plaatse wint. De Mol mag expres de verkeerde kant op sturen.', tags:['GENT','SLIM','FUN'] },
+  { number:'08', title:'APEROL-COCKTAIL WEDSTRIJD', desc:'Maak een originele "Zatte Mol"-cocktail. Naam, presentatie en smaak worden beoordeeld. De Mol is geheime jury. Haar keuze is definitief — en verdacht.', tags:['FUN','CHAOS'] },
+];
+
+const FOTO_OPDRACHTEN = [
+  { id:'f1', title:'De Onschuldige Foto', when:'Vrijdagavond — begin', desc:'Maak een groepsfoto waarbij iedereen er zo "normaal mogelijk" uitziet. Geen poses, geen grijnzen. Pure ernst. Beste acteur = vrijstelling drinkstraf.', tags:['FUN'] },
+  { id:'f2', title:'Betrapt!', when:'Tijdens eerste opdracht', desc:'Maak een foto van de persoon met de meest verdachte blik tijdens de opdracht. Zonder dat zij het doorheeft. Wordt getoond bij de testresultaten.', tags:['CHAOS'] },
+  { id:'f3', title:'De Alibi Foto', when:'Zaterdagochtend', desc:'Iedereen maakt een selfie op een specifieke plek als "bewijs". De Mol mag een valse locatie kiezen. Anderen raden welke foto nep is.', tags:['GENT','SLIM'] },
+  { id:'f4', title:'Onverwachte Schoonheid', when:'Zaterdagmiddag', desc:'Foto van iets in Gent dat niemand mooi verwacht te vinden. Geen toeristische plekken. Groepstemming bepaalt de winnaar.', tags:['GENT','FUN'] },
+  { id:'f5', title:'Het Bewijs', when:'Na de finale test', desc:'Iedereen maakt een foto van de persoon waarvan ze denken dat het de Mol is. Worden pas getoond als de Mol onthuld wordt.', tags:['SLIM'] },
+];
+
+const QUOTES_TICKER = '🍷 Niemand is onschuldig. ✦ De Mol drinkt altijd het eerste glas. ✦ Gent, 2024. Vijf vriendinnen. Eén verrader. ✦ Ze lacht te hard bij elke opdracht. Verdacht. ✦ Vertrouwen is voor mensen die nog nuchter zijn. ✦ De Korenmarkt liegt niet — mensen wel. ✦ Wie het Dreupelkot ontwijkt heeft iets te verbergen. 🍊';
+
+const MOL_TAKEN = [
+  { cat:'🥂 Drankjes', moeilijk:'●○○', tekst:'Spill the drink', detail:'Zorg dat iemand haar drankje morst. Val per ongeluk even tegen haar arm. Doe het in de eerste helft van de avond.' },
+  { cat:'🎭 Afleiden', moeilijk:'●●○', tekst:'Wijs de verkeerde kant op', detail:'Bij de volgende opdracht: fluister haar vlak ervoor het foute antwoord in het oor. Zo onschuldig mogelijk.' },
+  { cat:'🤫 Informatie', moeilijk:'●●○', tekst:'Deel een vals gerucht', detail:'Vertel één speler stiekem dat een andere speler "iets gezegd heeft over haar". Verzin iets geloofwaardigs maar onschuldig.' },
+  { cat:'📱 Afleiding', moeilijk:'●○○', tekst:'Maak iemand laat', detail:'Stuur de speler links van je een grappig filmpje net voor de volgende opdracht begint. De opdracht start zonder haar aandacht.' },
+  { cat:'🎯 Directe sabotage', moeilijk:'●●●', tekst:'Verander een antwoord', detail:'Kijk stiekem over iemands schouder mee bij de test. Zeg later het "foute" antwoord luidop — alsof je het zeker weet.' },
+  { cat:'😇 Sociaal', moeilijk:'●●○', tekst:'Vals compliment', detail:'Geef de sterkste speler een compliment over iets wat ze helemaal niet deed. Verwar de groep.' },
+  { cat:'🍷 Drankjes', moeilijk:'●○○', tekst:'Bestel een tweede drankje', detail:'Bestel stiekem een extra drankje voor de speler die jij het verdachtst vindt. Noem geen reden.' },
+  { cat:'🗣 Praatje', moeilijk:'●●○', tekst:'Zaai twijfel', detail:'Zeg: "Ik weet het niet, maar ik vind [naam] een beetje vreemd doen vanavond. Niet?" Zeg niks meer.' },
+  { cat:'🎪 Opdracht', moeilijk:'●●●', tekst:'Geef foute hints', detail:'Bij de volgende groepsopdracht: geef één foute hint verkleed als hulp. "Ik dacht echt dat het B was..."' },
+  { cat:'🧠 Psychologisch', moeilijk:'●●●', tekst:'Vergeet bewust iets', detail:'Vertel de groep dat je iets belangrijks hebt "vergeten". Speel het af als pech op een cruciaal moment.' },
+  { cat:'😂 Chaos', moeilijk:'●○○', tekst:'Verander het onderwerp', detail:'Zodra de groep begint te analyseren wie de Mol is: start een totaal ander gesprek. Zo lang als je kunt.' },
+];
+
+const DRINK_STRAFFEN = [
+  { icon:'🥂', text:'Drink één slok', sub:'Gewoon omdat het kan.' },
+  { icon:'🍷', text:'Drink twee slokken', sub:'De Mol kijkt toe en lacht.' },
+  { icon:'🍊', text:'Drink een shotje', sub:'Aperol telt ook. Alles telt.' },
+  { icon:'😂', text:'Drink én imiteer iemand', sub:'Zij raden wie. Fout geraden = nog een slok.' },
+  { icon:'💬', text:'Geef een toast', sub:'Zeg iets liefs over de persoon naast je. Of doe alsof.' },
+  { icon:'🤫', text:'Drink en fluister een geheim', sub:'In het oor van de persoon links van je.' },
+  { icon:'🎭', text:'Drink en doe 30 sec alsof je de Mol bent', sub:'Iedereen mag vragen stellen. Jij liegt.' },
+  { icon:'👑', text:'Niets! Jij wint deze ronde', sub:'Wijs iemand anders aan om te drinken.' },
+  { icon:'📱', text:'Drink en leg je gsm 10 min omgekeerd', sub:'Geen kijken. Beloofd.' },
+  { icon:'🔄', text:'Drink samen met de persoon rechts', sub:'Twee keer beter.' },
+  { icon:'😬', text:'Vertel je gênantste geheim van vanavond', sub:'Of drink drie keer. Jouw keuze.' },
+  { icon:'🕵️', text:'Pik iemands drankje', sub:'Drink één slok. Zij kiezen wie daarna drinkt.' },
+];
+
+const LIEGEN_STRAFFEN = [
+  { icon:'🃏', text:'Pak alle kaarten terug op', sub:'En drink twee slokken. Proficiat.' },
+  { icon:'😏', text:'Lieg de volgende beurt verplicht', sub:'Zelfs als je echte kaarten hebt.' },
+  { icon:'🍷', text:'Drink één slok per kaart die je had neergelegd', sub:'Tel maar.' },
+  { icon:'👁', text:'Toon al je kaarten aan iedereen', sub:'Oeps. Geen geheimen meer.' },
+  { icon:'🔄', text:'Wissel je hele hand met de persoon links', sub:'Succes.' },
+  { icon:'🤫', text:'Zeg de volgende 3 beurten niets', sub:'Zelfs niet roepen "Liegen!".' },
+  { icon:'🎯', text:'Jij start de volgende ronde', sub:'Dat is eigenlijk een voordeel. Of toch niet?' },
+  { icon:'👑', text:'Vrijgesteld! Niks', sub:'Deze keer. De volgende keer niet.' },
+];
+
+function defaultState() {
+  return {
+    players: JSON.parse(JSON.stringify(DEFAULT_PLAYERS)),
+    testQuestions: JSON.parse(JSON.stringify(DEFAULT_TEST_QUESTIONS)),
+    testAnswers: {}, pregameAnswers: {},
+    molId: null, adminPw: 'mol2024',
+    currentRound: 1, eliminations: [],
+    phase: -1, // -1 = pre-weekend, 0=vrijdag, 1=zaterdag, 2=finale
+    weekendStarted: false,
+    fotoUnlocked: {},
+    liegenScores: {},
+    elimPending: null,
+    lastUpdated: Date.now(),
+  };
+}
+
+let state = defaultState();
+let adminUnlocked = false;
+let currentTestAnswers = {};
+let currentPregameAnswers = [];
+let syncInterval = null;
+let isSharedMode = false;
+let editingPlayerId = null;
+let moltaakUnlocked = false;
+let elimCountdownTimer = null;
+let moreMenuOpen = false;
+
+// ══════════════════════════════════════════
+// SYNC
+// ══════════════════════════════════════════
+async function initSync() {
+  const dot = document.getElementById('syncDot');
+  const text = document.getElementById('syncText');
+  const loaded = await loadSharedState();
+  if (loaded && loaded.players) {
+    state = { ...defaultState(), ...loaded };
+    dot.style.background = 'var(--green)';
+    text.textContent = '🌐 Gesynchroniseerd ✓';
+    isSharedMode = true;
+  } else {
+    const ok = await saveSharedState(state);
+    if (ok) { dot.style.background = 'var(--green)'; text.textContent = '✨ Nieuwe sessie aangemaakt'; isSharedMode = true; }
+    else { dot.style.background = 'var(--pink)'; text.textContent = '⚠️ Lokale modus'; }
+  }
+  renderAll();
+  syncInterval = setInterval(async () => {
+    try {
+      const fresh = await loadSharedState();
+      if (fresh && fresh.lastUpdated && fresh.lastUpdated > (state.lastUpdated || 0)) {
+        const prevElim = state.elimPending;
+        state = { ...defaultState(), ...fresh };
+        text.textContent = '🔄 ' + new Date(state.lastUpdated).toLocaleTimeString('nl-BE');
+        renderCurrentPage();
+        if (state.elimPending && (!prevElim || state.elimPending.triggeredAt !== prevElim?.triggeredAt)) {
+          checkElimPending(state);
+        }
+      }
+    } catch(e) {}
+  }, 8000);
+}
+
+async function pushState() {
+  state.lastUpdated = Date.now();
+  const saved = await saveSharedState(state);
+  if (saved) showToast('Opgeslagen ✓');
+  else showToast('Lokaal opgeslagen ✓');
+}
+
+function renderAll() { renderHome(); }
+
+function renderCurrentPage() {
+  const active = document.querySelector('.page.active');
+  if (!active) return;
+  const id = active.id;
+  if (id==='home') renderHome();
+  else if (id==='kandidaten') renderKandidaten();
+  else if (id==='test') renderTest();
+  else if (id==='resultaten') renderResultaten();
+  else if (id==='opdrachten') renderOpdrachten();
+  else if (id==='pregame') renderPregame();
+  else if (id==='fotomomenten') renderFotomomenten();
+  else if (id==='moltaak') renderMoltaakPage();
+  else if (id==='liegen') renderLiegen();
+  else if (id==='admin' && adminUnlocked) renderAdmin();
+}
+
+// ══════════════════════════════════════════
+// NAV & NAVIGATION
+// ══════════════════════════════════════════
+const WEEKEND_PAGES = ['opdrachten','test','resultaten','drinkspel','liegen','fotomomenten','moltaak'];
+const MORE_PAGES = [
+  { id:'opdrachten', icon:'🍹', label:'Opdrachten' },
+  { id:'resultaten', icon:'🏆', label:'Scores' },
+  { id:'drinkspel',  icon:'🍷', label:'Drinkspel' },
+  { id:'liegen',     icon:'🃏', label:'Liegen' },
+  { id:'fotomomenten', icon:'📸', label:"Foto's" },
+  { id:'moltaak',    icon:'🎲', label:'Mol Taak' },
+];
+
+function navMore() {
+  soundDing();
+  moreMenuOpen = !moreMenuOpen;
+  const menu = document.getElementById('moreMenu');
+  if (moreMenuOpen) {
+    const grid = document.getElementById('moreMenuGrid');
+    grid.innerHTML = MORE_PAGES.map(p => {
+      const locked = !state.weekendStarted && WEEKEND_PAGES.includes(p.id);
+      return `<button onclick="goTo('${p.id}');closeMoreMenu()" style="background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:12px 8px;cursor:${locked?'default':'pointer'};opacity:${locked?.5:1};display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.5px">
+        <span style="font-size:22px">${p.icon}${locked?'🔒':''}</span>${p.label}</button>`;
+    }).join('');
+    menu.style.display = 'block';
+  } else {
+    menu.style.display = 'none';
+  }
+}
+
+function closeMoreMenu() { moreMenuOpen = false; document.getElementById('moreMenu').style.display = 'none'; }
+
+function goTo(page) {
+  // Check if locked
+  if (!state.weekendStarted && WEEKEND_PAGES.includes(page)) {
+    soundError();
+    showToast('🔒 Start eerst het weekend!');
+    return;
+  }
+  soundDing();
+  closeMoreMenu();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  const el = document.getElementById(page);
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+
+  if (page==='kandidaten') renderKandidaten();
+  else if (page==='test') renderTest();
+  else if (page==='resultaten') renderResultaten();
+  else if (page==='admin' && adminUnlocked) renderAdmin();
+  else if (page==='opdrachten') renderOpdrachten();
+  else if (page==='pregame') renderPregame();
+  else if (page==='home') renderHome();
+  else if (page==='fotomomenten') renderFotomomenten();
+  else if (page==='moltaak') renderMoltaakPage();
+  else if (page==='liegen') renderLiegen();
+  else if (page==='admin') {} // just show the lock
+}
+
+// ══════════════════════════════════════════
+// HOME
+// ══════════════════════════════════════════
+const WEEKEND_DATE = new Date('2025-05-16T18:00:00'); // Pas dit aan!
+
+function renderHome() {
+  document.getElementById('tickerText').textContent = QUOTES_TICKER;
+
+  const started = state.weekendStarted;
+  document.getElementById('startBanner').style.display = started ? 'none' : 'block';
+  document.getElementById('adminStartBanner').style.display = (adminUnlocked && !started) ? 'block' : 'none';
+
+  // Live countdown
+  if (!started) updateCountdown();
+
+  // Checklist — how many profiles + pregame filled
+  const profilesDone = state.players.filter(p => p.bio && p.bio.trim()).length;
+  const pregameDone = state.players.filter(p => {
+    const a = state.pregameAnswers[p.id];
+    return a && a.some(x => x && x.trim());
+  }).length;
+  const checklistEl = document.getElementById('prewkndChecklist');
+  if (checklistEl) {
+    checklistEl.innerHTML = [
+      { done: profilesDone >= state.players.length, text: `Profielen ingevuld (${profilesDone}/${state.players.length})` },
+      { done: pregameDone >= state.players.length,  text: `Pre-game bekentenissen (${pregameDone}/${state.players.length})` },
+      { done: false, text: 'Weekend starten — Admin only 🔒' },
+    ].map(c => `<div class="prewknd-check${c.done?' done':''}">
+      <span class="check-icon">${c.done?'✅':'⬜'}</span>
+      <span>${c.text}</span>
+    </div>`).join('');
+  }
+
+  // Phase dots
+  const phases = ['phase-pre','phase-vrijdag','phase-zaterdag','phase-finale'];
+  const phaseIdx = state.phase;
+  phases.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.className = 'phase-item';
+    const idx = i - 1;
+    if (idx < phaseIdx) el.classList.add('done');
+    else if (idx === phaseIdx) el.classList.add('active-phase');
+  });
+
+  // Home grid
+  const grid = document.getElementById('homeGrid');
+  const ALL_BTNS = [
+    { id:'kandidaten', icon:'💅', label:'Profielen',  sub:'Wie vertrouw jij?',      locked:false },
+    { id:'pregame',    icon:'🎭', label:'Pre-Game',   sub:'Gênante vragen',          locked:false },
+    { id:'opdrachten', icon:'🍹', label:'Opdrachten', sub:'Chaos & sabotage',        locked:!started },
+    { id:'test',       icon:'📝', label:'De Test',    sub:'Wie is de Mol?',          locked:!started },
+    { id:'resultaten', icon:'🏆', label:'Scores',     sub:'& Eliminatie',            locked:!started },
+    { id:'drinkspel',  icon:'🍷', label:'Drinkspel',  sub:'Regels & wiel',           locked:!started },
+    { id:'liegen',     icon:'🃏', label:'Liegen',     sub:'Kaarten omgedraaid',      locked:!started },
+    { id:'fotomomenten',icon:'📸',label:"Foto's",     sub:'Verborgen opdrachten',    locked:!started },
+    { id:'moltaak',    icon:'🎲', label:'Mol Taak',   sub:'Geheime sabotage',        locked:!started },
+    { id:'admin',      icon:'🔒', label:'Admin',      sub:'Alleen voor de Mol',      locked:false },
+  ];
+  grid.innerHTML = ALL_BTNS.map(b => `
+    <div class="home-btn${b.locked?' locked':''}" onclick="${b.locked?"showToast('🔒 Wacht op het weekend!')":`goTo('${b.id}')`}">
+      <div class="btn-icon">${b.icon}</div>
+      <div class="btn-label">${b.label}</div>
+      <div class="btn-sub">${b.locked?'🔒 Vergrendeld':b.sub}</div>
+    </div>`).join('');
+}
+
+let countdownTimer = null;
+function updateCountdown() {
+  const now = new Date();
+  const diff = WEEKEND_DATE - now;
+  if (diff <= 0) return;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = String(val).padStart(2,'0'); };
+  set('cdDagen', d); set('cdUren', h); set('cdMin', m); set('cdSec', s);
+  if (!countdownTimer) countdownTimer = setInterval(() => { if (!state.weekendStarted) updateCountdown(); else clearInterval(countdownTimer); }, 1000);
+}
+
+async function confirmStartWeekend() {
+  if (!confirm('🎉 Het weekend starten? Alle pagina\'s worden zichtbaar voor iedereen!')) return;
+  state.weekendStarted = true;
+  state.phase = 0;
+  await pushState();
+  soundSuccess();
+  spawnParticles(20);
+  showToast('🎉 Het weekend is begonnen!');
+  document.getElementById('adminStartBanner').style.display = 'none';
+  renderHome();
+}
+
+// ══════════════════════════════════════════
+// KANDIDATEN / PROFIELEN
+// ══════════════════════════════════════════
+function renderKandidaten() {
+  const grid = document.getElementById('kandidaatGrid');
+  const suspicion = calcSuspicion();
+  grid.innerHTML = state.players.map(p => {
+    const susp = suspicion[p.id] || 0;
+    const isAfg = state.eliminations.includes(p.id);
+    const hasBio = p.bio && p.bio.trim();
+    const hasQuote = p.quote && p.quote.trim();
+    const hasKroeg = p.favorietKroeg && p.favorietKroeg.trim();
+    const kleur = p.kleur || 'var(--pink)';
+    return `
+    <div class="profile-card">
+      <div class="profile-card-top">
+        <div class="profile-color-bar" style="background:linear-gradient(90deg,${kleur},transparent)"></div>
+        <div class="profile-avatar" style="border:3px solid ${kleur}22">${p.emoji}</div>
+        <div class="profile-header-info">
+          <div class="profile-name-big">${p.name}</div>
+          <span class="profile-badge ${isAfg?'afgevallen':'in-spel'}">${isAfg?'💀 Afgevallen':'✨ In het spel'}</span>
+        </div>
+      </div>
+      <div class="profile-body">
+        ${hasBio
+          ? `<div class="profile-bio"><div class="profile-bio-label">Verdachte eigenschap</div>${p.bio}</div>`
+          : `<div class="profile-empty">Nog geen profiel ingevuld... 👀</div>`}
+        ${hasQuote ? `<div class="profile-quote">${p.quote}</div>` : ''}
+        ${hasKroeg ? `<div class="profile-kroeg">🍺 Favoriete kroeg: <strong>${p.favorietKroeg}</strong></div>` : ''}
+        ${state.weekendStarted ? `
+        <div class="verdachte-bar">
+          <div class="verdachte-label">Verdacht-o-meter</div>
+          <div class="verdachte-track"><div class="verdachte-fill" style="width:${susp}%;background:linear-gradient(90deg,${kleur},${kleur}aa)"></div></div>
+          <div class="verdachte-pct">${susp}%</div>
+        </div>` : ''}
+        <button class="profile-edit-btn" onclick="openEditModal('${p.id}')">✏️ Mijn profiel bewerken</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function calcSuspicion() {
+  const counts = {};
+  state.players.forEach(p => counts[p.id] = 0);
+  Object.values(state.testAnswers).forEach(rounds => {
+    Object.values(rounds).forEach(answers => {
+      const molAns = answers['q1'];
+      if (molAns !== undefined && molAns !== null) {
+        const pid = state.players[molAns]?.id;
+        if (pid) counts[pid] = (counts[pid]||0) + 1;
+      }
+    });
+  });
+  const max = Math.max(...Object.values(counts), 1);
+  const result = {};
+  Object.entries(counts).forEach(([k,v]) => result[k] = Math.round((v/max)*100));
+  return result;
+}
+
+// ══════════════════════════════════════════
+// PROFILE EDIT MODAL
+// ══════════════════════════════════════════
+const PROFILE_COLORS = ['#e8517a','#f9883f','#e8c97e','#f27da0','#c084fc','#4ade80','#38bdf8','#fb7185','#a78bfa','#34d399'];
+
+function openEditModal(pid) {
+  soundDing();
+  editingPlayerId = pid;
+  const p = state.players.find(x => x.id === pid);
+  if (!p) return;
+  document.getElementById('editName').value = p.name;
+  document.getElementById('editBio').value = p.bio || '';
+  document.getElementById('editQuote').value = p.quote || '';
+  document.getElementById('editKroeg').value = p.favorietKroeg || '';
+
+  // Emoji picker
+  document.getElementById('emojiPicker').innerHTML = EMOJIS.map(e =>
+    `<div class="emoji-opt ${p.emoji===e?'selected':''}" onclick="selectEmoji('${e}',this)">${e}</div>`
+  ).join('');
+
+  // Color picker
+  document.getElementById('colorPicker').innerHTML = PROFILE_COLORS.map(c =>
+    `<div class="color-opt ${(p.kleur||'#e8517a')===c?'selected':''}" style="background:${c}" onclick="selectColor('${c}',this)"></div>`
+  ).join('');
+
+  document.getElementById('editModal').classList.add('show');
+}
+
+function selectEmoji(emoji, el) {
+  soundDing();
+  document.querySelectorAll('.emoji-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectColor(color, el) {
+  soundDing();
+  document.querySelectorAll('.color-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function closeEditModal() { document.getElementById('editModal').classList.remove('show'); editingPlayerId = null; }
+
+async function saveProfile() {
+  const p = state.players.find(x => x.id === editingPlayerId);
+  if (!p) return;
+  p.emoji = document.querySelector('.emoji-opt.selected')?.textContent || p.emoji;
+  p.kleur = document.querySelector('.color-opt.selected')?.style.background || p.kleur || '#e8517a';
+  p.name  = document.getElementById('editName').value.trim() || p.name;
+  p.bio   = document.getElementById('editBio').value.trim();
+  p.quote = document.getElementById('editQuote').value.trim();
+  p.favorietKroeg = document.getElementById('editKroeg').value.trim();
+  closeEditModal();
+  await pushState();
+  soundSuccess();
+  spawnParticles(8);
+  renderKandidaten();
+  renderHome(); // update checklist
+}
+
+// ══════════════════════════════════════════
+// OPDRACHTEN
+// ══════════════════════════════════════════
+function renderOpdrachten() {
+  const list = document.getElementById('opdrachtenList');
+  const tagClass = t => t==='CHAOS'?'tag-chaos':t==='SLIM'?'tag-slim':t==='GENT'?'tag-gent':'tag-fun';
+  list.innerHTML = OPDRACHTEN.map(o => `
+    <div class="opdracht-card">
+      <div class="opdracht-number">Opdracht ${o.number}</div>
+      <div class="opdracht-title">${o.title}</div>
+      <div class="opdracht-desc">${o.desc}</div>
+      <div class="opdracht-tags">${o.tags.map(t=>`<span class="tag ${tagClass(t)}">${t}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════
+// PREGAME
+// ══════════════════════════════════════════
+function renderPregame() {
+  const sel = document.getElementById('pregamePlayerSelect');
+  sel.innerHTML = '<option value="">— Selecteer jezelf —</option>' +
+    state.players.map(p => `<option value="${p.id}">${p.emoji} ${p.name}</option>`).join('');
+  sel.onchange = () => loadPregameForm(sel.value);
+  document.getElementById('pregameForm').innerHTML = '';
+  document.getElementById('submitPregameBtn').disabled = true;
+}
+
+function loadPregameForm(pid) {
+  if (!pid) { document.getElementById('pregameForm').innerHTML = ''; document.getElementById('submitPregameBtn').disabled = true; return; }
+  const existing = state.pregameAnswers[pid] || Array(PREGAME_QUESTIONS.length).fill('');
+  currentPregameAnswers = [...existing];
+  document.getElementById('pregameForm').innerHTML = PREGAME_QUESTIONS.map((q, i) => `
+    <div class="pregame-q">
+      <div class="q-number">Vraag ${i+1}</div>
+      <div class="q-text">${q}</div>
+      <textarea placeholder="Jouw eerlijke antwoord..." oninput="currentPregameAnswers[${i}]=this.value;checkPregameComplete()">${existing[i]||''}</textarea>
+    </div>`).join('');
+  checkPregameComplete();
+}
+
+function checkPregameComplete() {
+  document.getElementById('submitPregameBtn').disabled = currentPregameAnswers.filter(a=>a&&a.trim()).length < PREGAME_QUESTIONS.length;
+}
+
+async function submitPregame() {
+  const pid = document.getElementById('pregamePlayerSelect').value;
+  if (!pid) return;
+  state.pregameAnswers[pid] = [...currentPregameAnswers];
+  soundGlass();
+  spawnParticles(8);
+  await pushState();
+}
+
+let allAnswersVisible = false;
+function toggleAllAnswers() {
+  soundDing();
+  allAnswersVisible = !allAnswersVisible;
+  const view = document.getElementById('allAnswersView');
+  if (!allAnswersVisible) { view.innerHTML = ''; return; }
+  let html = '';
+  state.players.forEach(p => {
+    const ans = state.pregameAnswers[p.id];
+    if (!ans || ans.every(a => !a)) return;
+    html += `<div style="margin-top:18px;padding:16px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px">
+      <div style="font-family:var(--font-display);font-size:20px;font-weight:900;font-style:italic;color:var(--pink2);margin-bottom:10px">${p.emoji} ${p.name}</div>`;
+    PREGAME_QUESTIONS.forEach((q,i) => {
+      if (!ans[i]) return;
+      html += `<div style="padding:10px 0;border-bottom:1px solid rgba(61,24,48,.5)">
+        <div style="font-size:11px;font-weight:600;color:var(--muted);letter-spacing:1px;margin-bottom:4px;text-transform:uppercase">${q}</div>
+        <div style="font-family:var(--font-italic);font-style:italic;color:var(--gold);font-size:15px">${ans[i]}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  if (!html) html = '<div class="empty-state"><span class="es-icon">🤐</span>Nog niemand ingevuld.</div>';
+  view.innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// TEST
+// ══════════════════════════════════════════
+function renderTest() {
+  const sel = document.getElementById('testPlayerSelect');
+  sel.innerHTML = '<option value="">— Selecteer jezelf —</option>' +
+    state.players.filter(p=>!state.eliminations.includes(p.id)).map(p=>`<option value="${p.id}">${p.emoji} ${p.name}</option>`).join('');
+  sel.onchange = () => loadTestForm(sel.value);
+  document.getElementById('testForm').innerHTML = '';
+  document.getElementById('submitTestBtn').disabled = true;
+}
+
+function loadTestForm(pid) {
+  const form = document.getElementById('testForm');
+  if (!pid) { form.innerHTML=''; document.getElementById('submitTestBtn').disabled=true; return; }
+  const existing = state.testAnswers[pid]?.[state.currentRound] || {};
+  currentTestAnswers = { ...existing };
+  const letters = ['A','B','C','D','E'];
+  form.innerHTML = state.testQuestions.map((q, qi) => {
+    const opts = ['q1','q2','q3','q4'].includes(q.id) ? state.players.map(p=>p.name) : q.options;
+    return `<div class="question-card">
+      <div class="q-number">Vraag ${qi+1}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options-list">${opts.map((opt,oi)=>`
+        <button class="option-btn ${currentTestAnswers[q.id]===oi?'selected':''}" onclick="selectTestAnswer('${q.id}',${oi},this)">
+          <span class="opt-letter">${letters[oi]||oi+1}</span><span>${opt}</span>
+        </button>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  checkTestComplete();
+}
+
+function selectTestAnswer(qId, optIdx, btn) {
+  soundDing();
+  currentTestAnswers[qId] = optIdx;
+  btn.closest('.question-card').querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  checkTestComplete();
+}
+
+function checkTestComplete() {
+  document.getElementById('submitTestBtn').disabled = Object.keys(currentTestAnswers).length < state.testQuestions.length;
+}
+
+async function submitTest() {
+  const pid = document.getElementById('testPlayerSelect').value;
+  if (!pid) return;
+  if (!state.testAnswers[pid]) state.testAnswers[pid] = {};
+  state.testAnswers[pid][state.currentRound] = { ...currentTestAnswers };
+  soundGlass();
+  spawnParticles(10);
+  await pushState();
+  goTo('resultaten');
+}
+
+// ══════════════════════════════════════════
+// RESULTATEN
+// ══════════════════════════════════════════
+function calcScores() {
+  const scores = {};
+  state.players.forEach(p => scores[p.id] = { name:p.name, emoji:p.emoji, total:0, submitted:false });
+  state.players.forEach(p => {
+    const rounds = state.testAnswers[p.id] || {};
+    let total = 0;
+    Object.entries(rounds).forEach(([,answers]) => {
+      state.testQuestions.forEach(q => { if (q.correctIndex!==null && answers[q.id]===q.correctIndex) total++; });
+    });
+    scores[p.id].total = total;
+    scores[p.id].submitted = Object.keys(rounds).length > 0;
+  });
+  return scores;
+}
+
+function renderResultaten() {
+  const c = document.getElementById('resultatenContent');
+  const scores = calcScores();
+  const active = state.players.filter(p=>!state.eliminations.includes(p.id));
+  const eliminated = state.players.filter(p=>state.eliminations.includes(p.id));
+  const sorted = active.map(p=>({...scores[p.id],id:p.id})).sort((a,b)=>b.total-a.total);
+  const maxScore = Math.max(...sorted.map(s=>s.total), 1);
+  const hasCorrect = state.testQuestions.some(q=>q.correctIndex!==null);
+  const submittedCount = active.filter(p=>scores[p.id].submitted).length;
+  let html = `<div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+    <span style="font-size:22px">📝</span>
+    <div>
+      <div style="font-size:13px;font-weight:600">${submittedCount} van ${active.length} ingestuurd</div>
+      <div style="font-size:11px;color:var(--muted);font-style:italic">${submittedCount===active.length?'Iedereen klaar ✓':'Wachten op de rest...'}</div>
+    </div>
+  </div>`;
+  if (sorted.length > 0) {
+    html += `<div class="section-label">🏆 Scorebord — Ronde ${state.currentRound}</div><div class="score-board">`;
+    sorted.forEach((s,i) => {
+      const rank = i+1, isLast = rank===sorted.length && sorted.length>1;
+      const barW = maxScore>0 ? Math.round((s.total/maxScore)*100) : 0;
+      html += `<div class="score-row ${rank===1?'rank-1':''}" style="${isLast&&hasCorrect?'border-color:rgba(232,81,122,.4)':''}">
+        <div class="score-rank ${rank===1?'first':isLast?'last':''}">${rank}</div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="score-name">${s.emoji} ${s.name}</div>
+            <div class="score-pts">${scores[s.id].submitted?s.total+' pt':'—'}</div>
+            ${isLast&&hasCorrect?'<span style="font-size:9px;background:rgba(232,81,122,.15);color:var(--pink2);border:1px solid var(--pink);border-radius:20px;padding:2px 8px;font-weight:700">⚠️ GEVAAR</span>':''}
+          </div>
+          <div class="score-bar-wrap"><div class="score-bar-track"><div class="score-bar-fill" style="width:${scores[s.id].submitted?barW:0}%"></div></div></div>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  } else { html += '<div class="empty-state"><span class="es-icon">📝</span>Nog geen tests ingestuurd.</div>'; }
+  if (eliminated.length > 0) {
+    html += '<div class="section-label" style="margin-top:20px">💀 Afgevallen</div><div class="elimination-section">';
+    eliminated.forEach(p => { html += `<div style="font-family:var(--font-display);font-size:30px;font-weight:900;font-style:italic;color:var(--muted);text-decoration:line-through;opacity:.6;margin:4px 0">${p.emoji} ${p.name}</div>`; });
+    html += '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// Elimination countdown
+let elimCountdownTimer2 = null;
+async function adminTriggerElim() {
+  const scores = calcScores();
+  const active = state.players.filter(p=>!state.eliminations.includes(p.id));
+  if (active.length < 2) { showToast('Niet genoeg spelers!'); return; }
+  if (!state.testQuestions.some(q=>q.correctIndex!==null)) { showToast('Stel eerst correcte antwoorden in! 🎯'); return; }
+  const sorted = active.map(p=>({...scores[p.id],id:p.id})).sort((a,b)=>a.total-b.total);
+  const loser = sorted[0];
+  state.elimPending = { pid:loser.id, name:loser.name, score:loser.total, triggeredAt:Date.now() };
+  state.eliminations.push(loser.id);
+  await pushState();
+  startElimCountdown(loser.name, loser.total);
+}
+
+function checkElimPending(s) {
+  if (!s.elimPending) return;
+  const { name, score, triggeredAt } = s.elimPending;
+  const overlay = document.getElementById('elimOverlay');
+  if (Date.now()-triggeredAt < 30000 && !overlay.classList.contains('show')) startElimCountdown(name, score);
+}
+
+function startElimCountdown(name, score) {
+  const overlay = document.getElementById('elimOverlay');
+  const fase1 = document.getElementById('elimFase1');
+  const fase2 = document.getElementById('elimFase2');
+  const countEl = document.getElementById('elimCountdown');
+  const flashes = document.getElementById('elimFlashes');
+  fase1.style.display = 'flex'; fase2.style.display = 'none';
+  overlay.classList.add('show','counting');
+  let count = 5; countEl.textContent = count;
+  if (elimCountdownTimer2) clearInterval(elimCountdownTimer2);
+  elimCountdownTimer2 = setInterval(() => {
+    soundCountdown();
+    flashes.classList.remove('flashing'); void flashes.offsetWidth; flashes.classList.add('flashing');
+    count--;
+    if (count > 0) {
+      countEl.textContent = count;
+      countEl.style.animation='none'; void countEl.offsetWidth; countEl.style.animation='count-pulse 1s ease-in-out';
+    } else {
+      clearInterval(elimCountdownTimer2);
+      overlay.classList.remove('counting');
+      fase1.style.display = 'none'; fase2.style.display = 'flex';
+      document.getElementById('elimRevealName').textContent = name.toUpperCase();
+      document.getElementById('elimRevealScore').textContent = score + ' punten';
+      soundElimReveal();
+      spawnParticles(15);
+    }
+  }, 1000);
+}
+
+function closeElimOverlay() {
+  document.getElementById('elimOverlay').classList.remove('show','counting');
+  if (elimCountdownTimer2) clearInterval(elimCountdownTimer2);
+  renderResultaten(); renderKandidaten();
+}
+
+// ══════════════════════════════════════════
+// DRINKSPEL
+// ══════════════════════════════════════════
+function spinDrinkwheel() {
+  soundDice();
+  const straf = DRINK_STRAFFEN[Math.floor(Math.random()*DRINK_STRAFFEN.length)];
+  document.getElementById('drinkResultIcon').textContent = straf.icon;
+  document.getElementById('drinkResultText').textContent = straf.text;
+  document.getElementById('drinkResultSub').textContent = straf.sub;
+  const el = document.getElementById('drinkResult');
+  el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  spawnParticles(6);
+}
+
+// ══════════════════════════════════════════
+// LIEGEN
+// ══════════════════════════════════════════
+function renderLiegen() {
+  if (!state.liegenScores) state.liegenScores = {};
+  state.players.forEach(p => { if (!state.liegenScores[p.id]) state.liegenScores[p.id] = 0; });
+  const sorted = [...state.players].sort((a,b)=>(state.liegenScores[b.id]||0)-(state.liegenScores[a.id]||0));
+  const board = document.getElementById('liegenScoreBoard');
+  board.innerHTML = sorted.map((p,i) => `
+    <div class="liegen-player-row">
+      <span class="liegen-crown">${i===0?'👑':p.emoji}</span>
+      <div class="liegen-player-name">${p.name}</div>
+      <div class="liegen-score-btns">
+        <button class="liegen-btn" onclick="liegenAdjust('${p.id}',-1)">−</button>
+        <div class="liegen-score-val">${state.liegenScores[p.id]||0}</div>
+        <button class="liegen-btn" onclick="liegenAdjust('${p.id}',1)">+</button>
+      </div>
+    </div>`).join('');
+}
+
+async function liegenAdjust(pid, delta) {
+  soundDing();
+  if (!state.liegenScores) state.liegenScores = {};
+  state.liegenScores[pid] = Math.max(0, (state.liegenScores[pid]||0) + delta);
+  renderLiegen();
+  await pushState();
+}
+
+async function liegenNewRound() {
+  soundGlass();
+  spawnParticles(10);
+  showToast('Nieuwe ronde! 🃏');
+}
+
+async function liegenReset() {
+  if (!confirm('Alle Liegen-scores resetten?')) return;
+  state.liegenScores = {};
+  state.players.forEach(p => state.liegenScores[p.id] = 0);
+  await pushState();
+  renderLiegen();
+}
+
+function spinLiegenWheel() {
+  soundDice();
+  const straf = LIEGEN_STRAFFEN[Math.floor(Math.random()*LIEGEN_STRAFFEN.length)];
+  document.getElementById('liegenResultIcon').textContent = straf.icon;
+  document.getElementById('liegenResultText').textContent = straf.text;
+  document.getElementById('liegenResultSub').textContent = straf.sub;
+  const el = document.getElementById('liegenResult');
+  el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  spawnParticles(6);
+}
+
+// ══════════════════════════════════════════
+// MOL TAAK
+// ══════════════════════════════════════════
+function renderMoltaakPage() {
+  const sel = document.getElementById('moltaakPlayerSelect');
+  if (sel) sel.innerHTML = '<option value="">— Wie ben jij? —</option>' + state.players.map(p=>`<option value="${p.id}">${p.emoji} ${p.name}</option>`).join('');
+  document.getElementById('moltaakPwSection').style.display = moltaakUnlocked ? 'none' : 'block';
+  document.getElementById('moltaakContent').style.display = moltaakUnlocked ? 'block' : 'none';
+}
+
+function unlockMoltaak() {
+  const pid = document.getElementById('moltaakPlayerSelect').value;
+  const pw = document.getElementById('moltaakPwInput').value;
+  if (!pid) { showToast('Selecteer eerst jezelf 👀'); return; }
+  if (pw !== state.adminPw) { soundError(); showToast('Fout wachtwoord 🚫'); document.getElementById('moltaakPwInput').value=''; return; }
+  if (pid !== state.molId && state.molId) { soundError(); showToast('Jij bent de Mol niet! 😇'); return; }
+  moltaakUnlocked = true;
+  document.getElementById('moltaakPwSection').style.display='none';
+  document.getElementById('moltaakContent').style.display='block';
+  soundSuccess(); showToast('Welkom, Mol 🕵️‍♀️');
+}
+
+function generateTaak() {
+  soundDice();
+  const taak = MOL_TAKEN[Math.floor(Math.random()*MOL_TAKEN.length)];
+  document.getElementById('taakCategory').textContent = taak.cat;
+  document.getElementById('taakText').textContent = taak.tekst;
+  document.getElementById('taakDetail').textContent = taak.detail;
+  document.getElementById('taakMoeilijk').textContent = taak.moeilijk;
+  const el = document.getElementById('taakResult');
+  el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  spawnParticles(4);
+}
+
+// ══════════════════════════════════════════
+// FOTOMOMENTEN
+// ══════════════════════════════════════════
+function renderFotomomenten() {
+  const list = document.getElementById('fotomomentList');
+  if (!list) return;
+  const unlocked = state.fotoUnlocked || {};
+  const tagClass = t => t==='GENT'?'tag-gent':t==='SLIM'?'tag-slim':t==='FUN'?'tag-fun':'tag-chaos';
+  list.innerHTML = FOTO_OPDRACHTEN.map(f => {
+    const isUnlocked = !!unlocked[f.id];
+    return `<div class="foto-card" id="fotocard_${f.id}">
+      <div class="foto-header">
+        <div class="foto-moment-num">📸 ${f.when}</div>
+        <span class="foto-unlock-badge${isUnlocked?' unlocked':''}">${isUnlocked?'✓ Ontgrendeld':'🔒 Vergrendeld'}</span>
+      </div>
+      <div class="foto-body">
+        <div class="foto-title">${f.title}</div>
+        <div class="foto-desc">${f.desc}</div>
+        <div class="opdracht-tags">${(f.tags||[]).map(t=>`<span class="tag ${tagClass(t)}">${t}</span>`).join('')}</div>
+      </div>
+      ${!isUnlocked?`<div class="foto-lock-overlay"><span class="foto-lock-icon">🔒</span><div class="foto-lock-text">Nog niet ontgrendeld.<br>Wacht op de Admin.</div></div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// ADMIN
+// ══════════════════════════════════════════
+function checkAdminPw() {
+  const pw = document.getElementById('adminPwInput').value;
+  if (pw === state.adminPw) {
+    adminUnlocked = true;
+    document.getElementById('adminLock').style.display='none';
+    renderAdmin();
+    document.getElementById('adminPanel').style.display='block';
+    soundSuccess();
+    document.getElementById('adminStartBanner').style.display = !state.weekendStarted ? 'block' : 'none';
+    renderHome();
+  } else { soundError(); showToast('Fout wachtwoord 🚫'); document.getElementById('adminPwInput').value=''; }
+}
+
+function renderAdmin() {
+  const panel = document.getElementById('adminPanel');
+  const playerOpts = state.players.map(p=>`<option value="${p.id}" ${state.molId===p.id?'selected':''}>${p.emoji} ${p.name}</option>`).join('');
+  const phaseOpts = ['Vrijdagavond (Ronde 1)','Zaterdagavond (Ronde 2)','Finale 🍾'].map((l,i)=>`<option value="${i}" ${i===state.phase?'selected':''}>${l}</option>`).join('');
+  const roundOpts = [1,2,3].map(r=>`<option value="${r}" ${r===state.currentRound?'selected':''}>${r}</option>`).join('');
+
+  panel.innerHTML = `
+  <div class="admin-section" style="border-color:rgba(232,81,122,.5)">
+    <h3 style="color:var(--pink2)">🎬 Eliminatie Starten</h3>
+    <p style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:16px">Laagste score valt automatisch af. Countdown verschijnt op <strong>alle telefoons</strong>.</p>
+    <button class="submit-btn" onclick="adminTriggerElim()" style="margin-top:0">🎬 Start Eliminatie Countdown</button>
+  </div>
+
+  <div class="admin-section">
+    <h3>🎭 Mol instellen</h3>
+    <span class="admin-label">De Mol is:</span>
+    <select id="molSelect">${playerOpts}<option value="">— Nog niet ingesteld —</option></select>
+    <button class="save-btn" onclick="saveMol()">Opslaan</button>
+    <div class="saved-msg" id="molSaved">✓ Opgeslagen</div>
+  </div>
+
+  <div class="admin-section">
+    <h3>⚙️ Weekend & Fase</h3>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(61,24,48,.5)">
+      <span style="font-size:13px;font-weight:600">Weekend gestart?</span>
+      <button class="inline-btn" onclick="toggleWeekend()" style="${state.weekendStarted?'border-color:var(--green);color:var(--green)':'border-color:var(--pink);color:var(--pink2)'}">${state.weekendStarted?'✓ Gestart':'✗ Nog niet'}</button>
+    </div>
+    <span class="admin-label">Huidige fase:</span>
+    <select id="phaseSelect">${phaseOpts}</select>
+    <span class="admin-label">Huidige ronde:</span>
+    <select id="roundSelect">${roundOpts}</select>
+    <button class="save-btn" onclick="savePhase()">Opslaan</button>
+    <div class="saved-msg" id="phaseSaved">✓ Opgeslagen</div>
+  </div>
+
+  <div class="admin-section">
+    <h3>📋 Spelerstatus</h3>
+    ${state.players.map(p=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(61,24,48,.5)">
+      <div style="font-family:var(--font-display);font-size:17px;font-weight:700">${p.emoji} ${p.name}</div>
+      <div style="display:flex;gap:8px">
+        <button class="inline-btn" onclick="setPlayerStatus('${p.id}','in-spel')" style="${!state.eliminations.includes(p.id)?'border-color:var(--pink);color:var(--pink2)':''}">✓ In spel</button>
+        <button class="inline-btn" onclick="setPlayerStatus('${p.id}','afgevallen')" style="${state.eliminations.includes(p.id)?'border-color:var(--pink);color:var(--pink2)':''}">✗ Afg.</button>
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="admin-section">
+    <h3>🎯 Correcte antwoorden</h3>
+    <p style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:14px">Stel de juiste antwoorden in voor de test.</p>
+    ${state.testQuestions.map((q,qi)=>{
+      const opts = ['q1','q2','q3','q4'].includes(q.id) ? state.players.map(p=>p.name) : q.options;
+      return `<span class="admin-label">V${qi+1}: ${q.text.substring(0,45)}...</span>
+      <select onchange="setCorrectAnswer('${q.id}',this.value)">
+        <option value="">— Geen —</option>
+        ${opts.map((o,i)=>`<option value="${i}" ${q.correctIndex===i?'selected':''}>${o}</option>`).join('')}
+      </select>`;
+    }).join('')}
+    <button class="save-btn" onclick="saveCorrectAnswers()">Antwoorden opslaan</button>
+    <div class="saved-msg" id="answersSaved">✓ Opgeslagen</div>
+  </div>
+
+  <div class="admin-section" style="border-color:rgba(232,201,126,.3)">
+    <h3 style="color:var(--gold)">📸 Fotomomenten ontgrendelen</h3>
+    ${FOTO_OPDRACHTEN.map(f=>{
+      const isUnlocked=!!(state.fotoUnlocked&&state.fotoUnlocked[f.id]);
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(61,24,48,.5)">
+        <div><div style="font-size:13px;font-weight:600">${f.title}</div><div style="font-size:11px;color:var(--muted)">${f.when}</div></div>
+        <button class="inline-btn" onclick="toggleFotoUnlock('${f.id}')" style="${isUnlocked?'border-color:var(--gold);color:var(--gold)':''}">
+          ${isUnlocked?'🔓 Open':'🔒 Vergrendeld'}
+        </button>
+      </div>`;
+    }).join('')}
+    <button class="save-btn" onclick="saveFotoUnlocks()">Opslaan</button>
+    <div class="saved-msg" id="fotoSaved">✓ Bijgewerkt</div>
+  </div>
+
+  <div class="admin-section" style="border-color:rgba(232,81,122,.3)">
+    <h3 style="color:var(--pink)">⚠️ Reset</h3>
+    <button class="save-btn" style="background:rgba(232,81,122,.1);border-color:var(--pink);color:var(--pink2);margin-top:0" onclick="resetAll()">Alles resetten 🗑</button>
+  </div>`;
+}
+
+async function saveMol() { state.molId=document.getElementById('molSelect').value||null; await pushState(); flashSaved('molSaved'); }
+function setCorrectAnswer(qId,val) { const q=state.testQuestions.find(x=>x.id===qId); if(q) q.correctIndex=val===''?null:parseInt(val); }
+async function saveCorrectAnswers() { await pushState(); flashSaved('answersSaved'); }
+async function savePhase() { state.phase=parseInt(document.getElementById('phaseSelect').value); state.currentRound=parseInt(document.getElementById('roundSelect').value); await pushState(); renderHome(); flashSaved('phaseSaved'); }
+async function toggleWeekend() { state.weekendStarted=!state.weekendStarted; if(state.weekendStarted){state.phase=0;soundSuccess();spawnParticles(15);} await pushState(); renderAdmin(); renderHome(); }
+async function setPlayerStatus(pid,status) { if(status==='afgevallen'){if(!state.eliminations.includes(pid))state.eliminations.push(pid);}else{state.eliminations=state.eliminations.filter(x=>x!==pid);} await pushState(); renderAdmin(); }
+function toggleFotoUnlock(fid) { if(!state.fotoUnlocked)state.fotoUnlocked={}; state.fotoUnlocked[fid]=!state.fotoUnlocked[fid]; renderAdmin(); }
+async function saveFotoUnlocks() { await pushState(); flashSaved('fotoSaved'); }
+function flashSaved(id) { const el=document.getElementById(id); if(!el) return; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),2500); }
+async function resetAll() { if(!confirm('Weet je zeker? Alles wordt gewist!')) return; state=defaultState(); await pushState(); adminUnlocked=false; document.getElementById('adminLock').style.display='block'; document.getElementById('adminPanel').style.display='none'; document.getElementById('adminPwInput').value=''; showToast('Reset! Alles gewist 🍷'); renderHome(); }
+
+// Stubs
+function triggerElimination(){}
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+// Close more menu when clicking outside
+document.addEventListener('click', e => {
+  if (moreMenuOpen && !e.target.closest('#moreMenu') && !e.target.closest('#navMoreBtn')) closeMoreMenu();
+});
+
+initSync();
+</script>
+</body>
+</html>
